@@ -1,5 +1,5 @@
 <monster_detail>
-    <div class="container" id="remove">
+    <div class="container">
         <div class="row">
             <div class="col-sm-6 col-lg-4">
                 <div class="card-flip {monster-flip: flipped}" onclick={flipme}>
@@ -55,7 +55,6 @@
         var self = this;
         self.mon = self.opts.mon
         self.picked = self.mon.picked
-        self.delete = self.mon.delete
         self.flipped = false;
         self.full_party = self.opts.full_party
 
