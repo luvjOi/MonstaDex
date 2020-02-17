@@ -49,7 +49,6 @@
         </div>
         <div>
         <button type="button" class="btn btn-secondary pick-button" onclick="{delete_binding}">Remove</button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editAttacks">Edit Attacks</button>
     </div>
     </div>
     <script>
@@ -67,16 +66,15 @@
             CLIENT.events.trigger("pick_monster")
         }
 
-<!--        self.remove = function(){-->
-<!--              $("#remove").remove();-->
-<!--&lt;!&ndash;        }&ndash;&gt;  pull this out too-->
-
         self.delete_binding = function(){
-            self.remove()
             CLIENT.api.delete_binding(self.mon.id)
-              .done(function(mon){
-<!--                  self.delete = self.mon.delete-->
-               })
+               .fail(function(error){
+                    alert(error.responseJSON)
+                })
+                .always(function(){
+                    self.update_player()
+                    self.update()
+                })
         }
 
         self.pick_monster = function(){

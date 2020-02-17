@@ -19,6 +19,9 @@ ELEMENT = (
     ('Light', 'Light'),
     ('Omni', 'Omni'),
     ('Water', 'Water'),
+    ('Fairy', 'Fairy'),
+    ('Bug', 'Bug'),
+    ('Reptilian', 'Reptilian')
 )
 
 
