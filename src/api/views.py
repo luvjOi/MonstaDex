@@ -1,3 +1,5 @@
+import random
+
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework.decorators import action
@@ -92,6 +94,10 @@ class APIBindingViewSet(viewsets.ModelViewSet):
         monster = Monsta.objects.get(monsterName=request.data['monster']['monsterName'])
         mon = request.data['monster']
         add_mon = Binding.objects.create(player=request.user.player, monster=monster)
+        while add_mon.attacks.count() < 4:
+            attack_list = Attack.objects.all()
+            random_atk = random.choice(attack_list)
+            add_mon.attacks.add(random_atk)
         serializer = BindingSerializer(add_mon, many=False, context={'request': request})
         return Response(serializer.data)
 
