@@ -10,6 +10,7 @@ from bindings.models import Binding
 from monster.models import Monsta
 from players.models import Player
 from views import HomePageView
+import views
 
 admin.site.register(Monsta)
 admin.site.register(Player)
@@ -33,6 +34,7 @@ urlpatterns = [
     path('', include('attacks.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', TemplateView.as_view(template_name='home_page.html'), name='home'),
+    path('signup/', views.SignUp.as_view(), name='signup'),
 ]
 
 if settings.DEBUG:

@@ -10,6 +10,7 @@ from bindings.models import Binding
 from monster.models import Monsta
 from players.models import Player
 
+
 ELEMENT = [
     'arcane',
     'light',
@@ -100,3 +101,4 @@ class APIAttackViewSet(viewsets.ModelViewSet):
         attacks = Attack.objects.filter(element=data.capitalize())
         serializer = AttackSerializer(attacks, many=True, context={'request': request})
         return Response(serializer.data)
+
