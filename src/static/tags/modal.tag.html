@@ -42,6 +42,12 @@
 
         self.create_binding = function(){
             CLIENT.api.create_binding({monster:self.chosen_monster})
+            .done(function(){
+               window.location.reload();
+            })
+            .always(function(){
+                 self.update()
+             })
         }
 
         self.set_monster = function(){
