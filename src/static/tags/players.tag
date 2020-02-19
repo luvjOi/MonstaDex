@@ -35,6 +35,9 @@
                     self.update()
                 })
         }
+        CLIENT.events.on('create_binding', function(){
+            get_player(self.id)
+         })
         CLIENT.events.on('pick_monster', function(){
             get_player(self.id)
         })
