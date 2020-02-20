@@ -37,9 +37,6 @@ CLIENT.api = {
     delete_binding: function(pk){
       return CLIENT.api.request("DELETE", "/api/bindings/" + pk)
     },
-    save_mon: function(){
-      return CLIENT.api.request("POST", "/api/bindings/")
-    },
     get_attacks: function() {
       return CLIENT.api.request("GET", "/api/attacks/get_attacks/" )
     },
