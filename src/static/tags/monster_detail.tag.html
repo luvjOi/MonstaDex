@@ -2,12 +2,12 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6 col-lg-4">
-                <div class="card-flip {monster-flip: flipped}" onclick={flipme} >
+                <div class="card-flip {monster-flip: flipped}" onclick={flipme}>
                     <div class="front">
                         <div class="card monster-card">
                             <div class="card-body">
                                 <h5 class="card-title text-center">{mon.monsterName} = {picked}</h5>
-                                <img class="card-img-top " src="{mon.image}" alt="Card image cap">
+                                <img class="card-img-top" src="{mon.image}" alt="Card image cap">
                                 <p class="card-text">{mon.description}</p>
                             </div>
                             <div class="row button-row">
@@ -43,10 +43,13 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                      </div>
+                  </div>
             </div>
         </div>
+        <div>
+        <button type="button" class="btn btn-secondary pick-button" onclick="{delete_binding}">Remove</button>
+    </div>
     </div>
     <script>
         var self = this;
@@ -54,12 +57,25 @@
         self.picked = self.mon.picked
         self.flipped = false;
         self.full_party = self.opts.full_party
+
         self.flipme = function(){
             self.flipped = !self.flipped
         }
         self.update_player = function(){
             CLIENT.events.trigger("pick_monster")
         }
+
+        self.delete_binding = function(){
+            CLIENT.api.delete_binding(self.mon.id)
+               .fail(function(error){
+                    alert(error.responseJSON)
+                })
+                .always(function(){
+                    self.update_player()
+                    self.update()
+                })
+        }
+
         self.pick_monster = function(){
             self.flipme()
             CLIENT.api.pick_monster(self.mon.id)
