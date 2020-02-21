@@ -1,0 +1,73 @@
+<attacks_modal>
+    <div class="modal fade" id="editAttacks" tabindex="-1" role="dialog" aria-labelledby="editAttacks" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Choose Monster Attacks</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+             <select multiple="multiple" name="edit_attacks" onchange="{edit_attacks}" id="edit_attacks">
+                 <option each="{attack in attacks}"  value="{attack.id}">{attack.name}</option>
+             </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" onclick="{pick_attacks}"  data-dismiss="modal">Save changes</button>
+          </div>
+        </div>
+      </div>
+</div>
+    <script>
+     var self = this
+     self.attacks = {}
+     self.chosen_attacks = []
+     self.id = self.opts.id
+     self.on('mount', function(){
+          self.base_attacks();
+     })
+
+      self.edit_attacks = function(){
+            self.chosen_attacks = []
+            $('#edit_attacks option:selected').each(function(){
+            self.chosen_attacks.push($(this).val());
+            })
+            if($("#edit_attacks option:selected").length >= 4 ) {
+                $('#edit_attacks').prop('disabled', true);
+             }
+           console.log('this is a test')
+        }
+
+
+
+     self.pick_attacks = function(){
+            CLIENT.api.pick_attacks(self.id, self.chosen_attacks)
+                .done(function(){
+<!--               CLIENT.events.trigger('update_player')-->
+                })
+                .fail(function(error){
+                   alert(error.responseJSON)
+                })
+              }
+
+     self.base_attacks = function(){
+         CLIENT.api.base_attacks()
+          .done(function(attacks){
+               self.attacks = attacks
+           })
+           .fail(function(error){
+                console.log("Errors == " + error)
+            })
+            .always(function(){
+               self.update()
+            })
+           console.log(self.pick_attacks)
+        }
+    </script>
+    <style>
+        .highlight {
+          padding: 5px;
+          background-color: red;
+        }
+    </style>
+</attacks_modal>
