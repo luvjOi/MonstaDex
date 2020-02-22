@@ -22,6 +22,7 @@
      var self = this
      self.attacks = {}
      self.chosen_attacks = []
+     self.monster = self.opts.mon
      self.id = self.opts.id
      self.on('mount', function(){
           self.base_attacks();
@@ -34,23 +35,22 @@
             })
             if($("#edit_attacks option:selected").length >= 4 ) {
                 $('#edit_attacks').prop('disabled', true);
-             }
-           console.log('this is a test')
+            }
+            console.log(self.mon_attacks)
         }
-
 
 
      self.pick_attacks = function(){
             CLIENT.api.pick_attacks(self.id, self.chosen_attacks)
-                .done(function(){
-<!--               CLIENT.events.trigger('update_player')-->
-                })
-                .fail(function(error){
+             .done(function(){
+               CLIENT.events.trigger('update_player')
+               })
+              .fail(function(error){
                    alert(error.responseJSON)
-                })
+               })
               }
 
-     self.base_attacks = function(){
+     self.base_attacks = function(data){
          CLIENT.api.base_attacks()
           .done(function(attacks){
                self.attacks = attacks
@@ -61,8 +61,8 @@
             .always(function(){
                self.update()
             })
-           console.log(self.pick_attacks)
         }
+
     </script>
     <style>
         .highlight {
