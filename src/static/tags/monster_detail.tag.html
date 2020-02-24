@@ -1,5 +1,5 @@
 <monster_detail>
-    <attacks_modal id="{mon.id}"></attacks_modal>
+    <attacks_modal></attacks_modal>
     <div class="container">
         <div class="row">
             <div class="col-sm-6 col-lg-4">
@@ -34,7 +34,7 @@
                     <div class="back">
                         <div class="card monster-card">
                             <div class="card-body">
-                                <button type="button" class="btn btn-primary attack-modal" onclick="{flipme}" data-toggle="modal" data-target="#editAttacks">Edit Attacks</button>
+                                <button type="button" class="btn btn-primary attack-modal" onclick="{flipme}" data-toggle="modal" data-target="#editAttacks{mon.id}">Edit Attacks</button>
                                 <div class="text-center" each={atk in mon.attacks}>
                                     <div class="row attack-header row-center  {atk.element}">
                                         <div>{atk.name}</div>
@@ -60,6 +60,7 @@
 
         self.flipme = function(){
             self.flipped = !self.flipped
+            console.log(self.mon.id)
         }
         self.update_player = function(){
             CLIENT.events.trigger("pick_monster", "create_binding", "pick_attacks")
