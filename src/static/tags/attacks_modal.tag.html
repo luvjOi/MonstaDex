@@ -7,13 +7,13 @@
               <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
-             <select multiple="multiple" name="edit_attacks" onchange="{edit_attacks}" id="edit_attacks">
+             <select multiple="multiple" name="edit_attacks" onchange="{edit_attacks}" id="edit_attacks{id}">
                  <option each="{attack in attacks}"  value="{attack.id}">{attack.name}</option>
              </select>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" onclick="{pick_attacks}"  data-dismiss="modal">Save changes</button>
+              <button type="button" class="btn btn-primary" onclick="{pick_attacks}" id="disable" data-dismiss="modal">Save changes</button>
           </div>
         </div>
       </div>
@@ -30,13 +30,24 @@
 
       self.edit_attacks = function(){
             self.chosen_attacks = []
-            $('#edit_attacks option:selected').each(function(){
+            $('#edit_attacks'+ self.id +' option:selected').each(function(){
             self.chosen_attacks.push($(this).val());
             })
-            if($("#edit_attacks option:selected").length >= 4 ) {
+            if($("chosen_attacks").length > 4 ) {
                 $('#edit_attacks').prop('disabled', true);
             }
-            console.log(self.mon_attacks)
+            if($("chosen_attacks").length < 4 ) {
+                $('#edit_attacks').prop('disabled', true);
+            }
+            if($("chosen_attacks").length < 4 ) {
+                $('#disable').prop('disabled', true);
+                console.log("testing this shit out")
+            }
+            if($("chosen_attacks").length === 4 ) {
+                $('#disable').removeProp('disabled');
+            }
+
+            console.log(self.chosen_attacks)
         }
 
 
