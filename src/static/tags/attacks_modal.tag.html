@@ -7,13 +7,13 @@
               <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
-             <select multiple="multiple" name="edit_attacks" onchange="{edit_attacks}" id="edit_attacks{id}">
-                 <option each="{attack in attacks}"  value="{attack.id}">{attack.name}</option>
+             <select multiple="multiple" name="edit_attacks" onchange="{edit_attacks}" id="attacks_selection{id}">
+                 <option each="{attack in attacks}" value="{attack.id}" >{attack.name}</option>
              </select>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary disable" onclick="{pick_attacks}"  data-dismiss="modal">Save changes</button>
+              <button type="button" class="btn btn-primary save_attack" onclick="{pick_attacks}" data-dismiss="modal">Save changes</button>
           </div>
         </div>
       </div>
@@ -26,31 +26,42 @@
      self.id = self.opts.id
      self.on('mount', function(){
           self.base_attacks();
+          $('#editAttacks'+ self.id).on('show.bs.modal', function(){
+             self.set_attacks();
+          })
      })
+
+     self.set_attacks = function(){
+         var selectedAttacks = self.monster.attacks
+         for(var attack = 0; attack < selectedAttacks.length; attack++){
+             $('#attacks_selection' + self.id + ' option[value='+ selectedAttacks[attack].id + ']').prop('selected', true)
+           }
+         if (selectedAttacks.length < 4 ) {
+                $('.save_attack').prop('disabled', true);
+            }
+            if (selectedAttacks.length == 4 ) {
+                $('.save_attack').prop('disabled', false);
+            }
+     }
 
       self.edit_attacks = function(){
             self.chosen_attacks = []
-            $('#edit_attacks'+ self.id +' option:selected').each(function(){
-            self.chosen_attacks.push($(this).val());
+            $('#editAttacks'+ self.id +' option:selected').each(function(index, element){
+            self.chosen_attacks.push($(element).val());
             })
-            if($('chosen_attacks').length >= 4 ) {
-                $('#edit_attacks').prop('disabled', 'true');
+             console.log(self.chosen_attacks.length)
+             if (self.chosen_attacks.length < 4 ) {
+                $('.save_attack').prop('disabled', true);
             }
-            if($('#edit_attacks'+ self.id +' option:selected').length < 4 ) {
-                $('#edit_attacks').prop('disabled', true);
+
+            if (self.chosen_attacks.length == 4 ) {
+                $('.save_attack').prop('disabled', false);
             }
-            if($('chosen_attacks').length <= 4 ) {
-                $('.disable').prop('disabled', true);
-                console.log("testing this shit out")
-            }
-            if($('#edit_attacks'+ self.id +' option:selected').length == 4 ) {
-                $('.disable').prop('disabled', false);
-                console.log('testing this shit out too')
+
+            if (self.chosen_attacks.length > 4 ) {
+                $('.save_attack').prop('disabled', true);
             }
         }
-
-
-
 
      self.pick_attacks = function(){
             CLIENT.api.pick_attacks(self.id, self.chosen_attacks)
@@ -74,6 +85,5 @@
                self.update()
             })
         }
-
     </script>
 </attacks_modal>
