@@ -13,7 +13,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" onclick="{pick_attacks}"  id="disable"  data-dismiss="modal">Save changes</button>
+              <button type="button" class="btn btn-primary disable" onclick="{pick_attacks}"  data-dismiss="modal">Save changes</button>
           </div>
         </div>
       </div>
@@ -26,7 +26,6 @@
      self.id = self.opts.id
      self.on('mount', function(){
           self.base_attacks();
-          console.log(self.chosen_attacks.monster)
      })
 
       self.edit_attacks = function(){
@@ -34,21 +33,23 @@
             $('#edit_attacks'+ self.id +' option:selected').each(function(){
             self.chosen_attacks.push($(this).val());
             })
-            if($('#edit_attacks'+ self.id +' option:selected').length >= 4 ) {
+            if($('chosen_attacks').length >= 4 ) {
                 $('#edit_attacks').prop('disabled', 'true');
             }
-            if($("chosen_attacks").length < 4 ) {
+            if($('#edit_attacks'+ self.id +' option:selected').length < 4 ) {
                 $('#edit_attacks').prop('disabled', true);
             }
-            if($("chosen_attacks").length <= 4 ) {
-                $('#disable').prop('disabled', true);
+            if($('chosen_attacks').length <= 4 ) {
+                $('.disable').prop('disabled', true);
                 console.log("testing this shit out")
             }
             if($('#edit_attacks'+ self.id +' option:selected').length == 4 ) {
-                $('#disable').prop('disabled', false);
+                $('.disable').prop('disabled', false);
                 console.log('testing this shit out too')
             }
         }
+
+
 
 
      self.pick_attacks = function(){
@@ -75,10 +76,4 @@
         }
 
     </script>
-    <style>
-        .highlight {
-          padding: 5px;
-          background-color: red;
-        }
-    </style>
 </attacks_modal>
