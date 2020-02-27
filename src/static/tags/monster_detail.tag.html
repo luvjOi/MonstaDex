@@ -63,7 +63,7 @@
             console.log(self.mon.id)
         }
         self.update_player = function(){
-            CLIENT.events.trigger("pick_monster", "create_binding", "pick_attacks")
+            CLIENT.events.trigger("update_player")
         }
 
         self.delete_binding = function(){
