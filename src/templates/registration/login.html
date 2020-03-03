@@ -7,10 +7,11 @@
 
 {% block content %}
     <div class="container login-page text-center">
-        <form method="post" action="">
+        <form method="post"  action="{% url 'login' %}">
               {% csrf_token %}
               {{ form.as_p }}
             <button type="submit" class="login">Login</button>
+            <input type="hidden" name="next" value="{{next}}">
         </form>
     </div>
 {% endblock %}

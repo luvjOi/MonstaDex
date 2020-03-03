@@ -1,41 +1,32 @@
 from django.views.generic import TemplateView
-from django.contrib.auth.forms import UserCreationForm
-from django.urls import reverse_lazy
-from django.views import generic
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
 from players.models import Player
-from rest_framework import request
-from rest_framework.response import Response
+from django.urls import reverse_lazy
 
-from src.api.serializers import PlayerSerializer
+
+class SignUp(UserCreationForm):
+    success_url = reverse_lazy('login')
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUp(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            new_player = Player.objects.create(name=username)
+            user.player = new_player
+            user.player.save()
+            login(request, user)
+            return redirect('login')
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/signup.html', {'form': form})
 
 
 class HomePageView(TemplateView):
     template_name = 'home_page.html'
-
-
-class SignUp(generic.CreateView):
-    form_class = UserCreationForm
-    success_url = reverse_lazy('login')
-    template_name = 'registration/signup.html'
-
-    player = Player.objects.all()
-    add_player = Player.objects.create(name=request.player, user=request.user.username)
-    add_player.save()
-
-
-
-#     def post(self, request, *args, **kwargs):
-#         return super().post(self)
-#
-#
-# def new_player(request):
-#     player = Player.objects.all()
-#     add_player = player(name="TestNumber2")
-#     add_player.save()
-#
-#     add_player = Player.objects.create(name=request.user.player, user=request.user.username)
-#     add_player.user.player = add_player
-#     add_player.user.player.save()
-#     add_player.save()
-#     serializer = PlayerSerializer(add_player, many=True, context={'request': request})
-#     return serializer.data

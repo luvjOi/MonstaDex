@@ -79,7 +79,6 @@ class APIBindingViewSet(viewsets.ModelViewSet):
         monster.picked = not monster.picked
         monster.save()
         monster.player.save()
-        print(request.user.username)
         serializer = BindingSerializer(monster, many=False, context={'request': request})
         return Response(serializer.data)
 

@@ -1,16 +1,19 @@
 from django.conf import settings
-from django.conf.urls import include
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
+import src.views as src_views
+from django.contrib.auth import views as auth_views
+
 
 from attacks.models import Attack
 from bindings.models import Binding
 from monster.models import Monsta
 from players.models import Player
-from views import HomePageView
-import views
+from src.views import HomePageView
+# from src.players.views import MyPlayerView
+
 
 admin.site.register(Monsta)
 admin.site.register(Player)
@@ -34,7 +37,21 @@ urlpatterns = [
     path('', include('attacks.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', TemplateView.as_view(template_name='home_page.html'), name='home'),
-    path('signup/', views.SignUp.as_view(), name='signup'),
+    path('signup/', src_views.signup, name='signup'),
+    path('profile/',  'player_detail', name='profile'),
+    # path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
+    path('login/', auth_views.LoginView.as_view(
+            template_name='registration/login.html',
+            # extra_context={
+            #
+            #     # option 1: provide full path
+            #     'next': '/players/<int:pk>/'
+            #
+            #     # option 2: just provide the name of the url
+            #     # 'next': 'player_detail',
+            # },
+        ), name='login'),
+
 ]
 
 if settings.DEBUG:
@@ -43,6 +60,7 @@ if settings.DEBUG:
 
     # Django debug toolbar
     import debug_toolbar
+
     urlpatterns += [
         path('__debug__/', include(debug_toolbar.urls)),
     ]
