@@ -11,8 +11,6 @@ from attacks.models import Attack
 from bindings.models import Binding
 from monster.models import Monsta
 from players.models import Player
-
-# from src.players.urls import player_detail
 from src.views import HomePageView
 
 
