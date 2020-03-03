@@ -11,8 +11,9 @@ from attacks.models import Attack
 from bindings.models import Binding
 from monster.models import Monsta
 from players.models import Player
+
+# from src.players.urls import player_detail
 from src.views import HomePageView
-# from src.players.views import MyPlayerView
 
 
 admin.site.register(Monsta)
@@ -38,19 +39,8 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('', TemplateView.as_view(template_name='home_page.html'), name='home'),
     path('signup/', src_views.signup, name='signup'),
-    path('profile/',  'player_detail', name='profile'),
-    # path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
-    path('login/', auth_views.LoginView.as_view(
-            template_name='registration/login.html',
-            # extra_context={
-            #
-            #     # option 1: provide full path
-            #     'next': '/players/<int:pk>/'
-            #
-            #     # option 2: just provide the name of the url
-            #     # 'next': 'player_detail',
-            # },
-        ), name='login'),
+    path('profile/', src_views.profile, name='profile'),
+    path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
 
 ]
 
