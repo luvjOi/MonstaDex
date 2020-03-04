@@ -24,6 +24,7 @@
      self.chosen_attacks = []
      self.monster = self.opts.mon
      self.id = self.opts.id
+     self.selectedAttacks = []
      self.on('mount', function(){
           self.base_attacks();
           $('#editAttacks'+ self.id).on('show.bs.modal', function(){
@@ -31,15 +32,16 @@
           })
      })
 
+
      self.set_attacks = function(){
-         var selectedAttacks = self.monster.attacks
-         for(var attack = 0; attack < selectedAttacks.length; attack++){
-             $('#attacks_selection' + self.id + ' option[value='+ selectedAttacks[attack].id + ']').prop('selected', true)
+         self.selectedAttacks = self.monster.attacks
+         for(var attack = 0; attack < self.selectedAttacks.length; attack++){
+             $('#attacks_selection' + self.id + ' option[value='+ self.selectedAttacks[attack].id + ']').prop('selected', true)
            }
-         if (selectedAttacks.length < 4 ) {
+         if (self.selectedAttacks.length < 4 ) {
                 $('.save_attack').prop('disabled', true);
             }
-            if (selectedAttacks.length == 4 ) {
+            if (self.selectedAttacks.length == 4 ) {
                 $('.save_attack').prop('disabled', false);
             }
      }
@@ -49,9 +51,8 @@
             $('#editAttacks'+ self.id +' option:selected').each(function(index, element){
             self.chosen_attacks.push($(element).val());
             })
-             console.log(self.chosen_attacks.length)
              if (self.chosen_attacks.length < 4 ) {
-                $('.save_attack').prop('disabled', true); 
+                $('.save_attack').prop('disabled', true);
             }
 
             if (self.chosen_attacks.length == 4 ) {
@@ -59,7 +60,11 @@
             }
 
             if (self.chosen_attacks.length == 4 ) {
-                $('.disableOptions').prop('disabled', 'disabled');
+              console.log(self.attacks)
+               for (var attack = 0; attack < 4; attack++){
+                 console.log(self.attacks[self.chosen_attacks[attack]])
+
+               }
             }
         }
 
@@ -74,7 +79,7 @@
               }
 
      self.base_attacks = function(data){
-         CLIENT.api.base_attacks()
+         CLIENT.api.get_attacks()
           .done(function(attacks){
                self.attacks = attacks
            })

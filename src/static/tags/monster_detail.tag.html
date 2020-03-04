@@ -60,7 +60,6 @@
 
         self.flipme = function(){
             self.flipped = !self.flipped
-            console.log(self.mon.id)
         }
         self.update_player = function(){
             CLIENT.events.trigger("update_player")
@@ -69,7 +68,7 @@
         self.delete_binding = function(){
             CLIENT.api.delete_binding(self.mon.id)
                .done(function(mon){
-                    CLIENT.events.trigger('update_player')
+                    self.update_player()
                 })
                .fail(function(error){
                     alert(error.responseJSON)

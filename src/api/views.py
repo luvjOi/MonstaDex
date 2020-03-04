@@ -121,7 +121,7 @@ class APIAttackViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=["get"])
     def get_attacks(self, request):
-        attacks = Attack.objects.all()
+        attacks = Attack.objects.all().order_by('pk')
         serializer = AttackSerializer(attacks, many=True, context={'request': request})
         return Response(serializer.data)
 

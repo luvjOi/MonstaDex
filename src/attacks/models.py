@@ -25,3 +25,6 @@ class Attack(models.Model):
         if self.image is None and self.element is not None:
             self.image = "/static/images/elements/" + self.element + ".png"
         return super(Attack, self).save(*args, **kwargs)
+
+
+
