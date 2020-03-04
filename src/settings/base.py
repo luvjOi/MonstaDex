@@ -45,6 +45,7 @@ INSTALLED_APPS = THIRD_PARTY_APPS + OUR_APPS
 MIDDLEWARE = (
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -199,5 +200,5 @@ if DEBUG:
         "SHOW_TOOLBAR_CALLBACK": lambda request: True
     }
 
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'profile'
 LOGOUT_REDIRECT_URL = 'login'

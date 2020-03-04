@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
+from django.urls import reverse
 from rest_framework import viewsets
 
 from api.serializers import PlayerSerializer

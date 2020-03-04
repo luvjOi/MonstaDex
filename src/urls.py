@@ -1,15 +1,18 @@
 from django.conf import settings
-from django.conf.urls import include
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
+import src.views as src_views
+from django.contrib.auth import views as auth_views
+
 
 from attacks.models import Attack
 from bindings.models import Binding
 from monster.models import Monsta
 from players.models import Player
-from views import HomePageView
+from src.views import HomePageView
+
 
 admin.site.register(Monsta)
 admin.site.register(Player)
@@ -33,6 +36,10 @@ urlpatterns = [
     path('', include('attacks.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', TemplateView.as_view(template_name='home_page.html'), name='home'),
+    path('signup/', src_views.signup, name='signup'),
+    path('profile/', TemplateView.as_view(template_name='players/player_detail.html'), name='profile'),
+    path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
+
 ]
 
 if settings.DEBUG:
@@ -41,6 +48,7 @@ if settings.DEBUG:
 
     # Django debug toolbar
     import debug_toolbar
+
     urlpatterns += [
         path('__debug__/', include(debug_toolbar.urls)),
     ]

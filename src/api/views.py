@@ -12,6 +12,7 @@ from bindings.models import Binding
 from monster.models import Monsta
 from players.models import Player
 
+
 ELEMENT = [
     'arcane',
     'light',
