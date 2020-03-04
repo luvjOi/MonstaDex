@@ -12,7 +12,7 @@ class SignUp(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'password1', 'password2',)
+        fields = ('username', 'player_name', 'password1', 'password2',)
 
 
 def signup(request):
@@ -21,8 +21,9 @@ def signup(request):
         form.save()
         username = form.cleaned_data.get('username')
         raw_password = form.cleaned_data.get('password1')
+        player_name = form.cleaned_data.get('player_name')
         user = authenticate(username=username, password=raw_password)
-        Player.objects.create(name=username, user=user)
+        Player.objects.create(name=player_name, user=user)
         login(request, user)
         return render(request, 'players/player_detail.html')
     return render(request, 'registration/signup.html', {'form': form})
