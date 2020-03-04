@@ -1,0 +1,74 @@
+<modal>
+    <div class="container">
+        <!-- The Modal -->
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title text-center">Choose what monster you want</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="container">
+                            <select name="mon_list" id="mon_list" onchange="{set_monster}">
+                                <option each="{monster, index in monsters}" value="{index}">{monster.monsterName}</option>
+                            </select>
+                        </div>
+                        <div id="image_preview">
+                            <img id="mon_pic" class="mon_pic" src={chosen_monster.image}>
+                        </div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="{create_binding}">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var self = this
+        self.monsters = {}
+        self.player = {}
+        self.id = self.opts.id
+        self.chosen_monster = {}
+        self.attacks = {}
+        self.on('mount', function(){
+            CLIENT.events.on("player-found", self.save_player)
+            self.base_mon()
+        })
+
+        self.create_binding = function(){
+            CLIENT.api.create_binding({monster:self.chosen_monster})
+            .done(function(){
+              CLIENT.events.trigger('create_binding')
+            })
+        }
+
+        self.set_monster = function(){
+            self.chosen_monster = self.monsters[$('#mon_list option:selected').val()]
+        }
+
+        self.base_mon = function(){
+            CLIENT.api.base_mon()
+                .done(function(monsters){
+                    self.monsters = monsters
+                    self.chosen_monster = self.monsters[0]
+                })
+        }
+
+        self.save_player = function(player){
+            self.player = player
+        }
+    </script>
+    <style>
+        .mon_pic {
+           height: 50px;
+           width: 50px;
+           margin-top: 5px;
+        }
+    </style>
+</modal>

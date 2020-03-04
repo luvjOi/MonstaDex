@@ -39,17 +39,5 @@ class Player(models.Model):
             self.full_party = True
         if self.binding.filter(picked=True).count() < 3:
             self.full_party = False
-        if self.binding.count() != 7 and self.id:
-            from monster.models import Monsta
-            for mon in Monsta.objects.all():
-                if mon not in self.monsters.all():
-                    new_bind = Binding.objects.create(player=self, monster=mon)
-                    new_bind.picked = self.binding.filter(picked=True).count() < 3
-                    new_bind.save()
-                    self.save()
-        for mon in self.binding.all():
-            while mon.attacks.count() < 4:
-                attack_list = Attack.objects.all()
-                random_atk = random.choice(attack_list)
-                mon.attacks.add(random_atk)
         return super(Player, self).save(*args, **kwargs)
+
