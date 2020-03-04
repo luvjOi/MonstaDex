@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 
 
 class SignUp(UserCreationForm):
-    player_name = forms.CharField(max_length=30, required=False, help_text='Please choose a player name')
+    player_name = forms.CharField(max_length=30, required=True, help_text='Please choose a player name')
 
     class Meta:
         model = User
@@ -31,8 +31,3 @@ def signup(request):
 
 class HomePageView(TemplateView):
     template_name = 'home_page.html'
-
-
-def profile(request):
-    form = AuthenticationForm(request.POST)
-    return render(request, 'players/player_detail.html', {'form': form})
