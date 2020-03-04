@@ -44,7 +44,7 @@
         self.create_binding = function(){
             CLIENT.api.create_binding({monster:self.chosen_monster})
             .done(function(){
-              CLIENT.events.trigger('create_binding')
+              CLIENT.events.trigger('update_player')
             })
         }
 

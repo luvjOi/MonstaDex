@@ -84,6 +84,19 @@ class APIBindingViewSet(viewsets.ModelViewSet):
         serializer = BindingSerializer(monster, many=False, context={'request': request})
         return Response(serializer.data)
 
+    @action(detail=True, methods=['put'])
+    def pick_attacks(self, request, pk):
+        monster = Binding.objects.get(pk=pk)
+        monster.attacks.clear()
+        for attack in request.data:
+            attack = Attack.objects.get(pk=attack)
+            monster.attacks.add(attack)
+        if monster.attacks.count() > 4:
+            raise ValidationError("You're only allowed to choose up to four awesome attacks")
+        monster.save()
+        serializer = BindingSerializer(monster, many=False, context={'request': request})
+        return Response(serializer.data)
+
     @action(detail=True, methods=['delete'])
     def delete_binding(self, pk):
         remove_mon = Binding.objects.get(pk=pk)
@@ -109,7 +122,7 @@ class APIAttackViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=["get"])
     def get_attacks(self, request):
-        attacks = Attack.objects.all()
+        attacks = Attack.objects.all().order_by('pk')
         serializer = AttackSerializer(attacks, many=True, context={'request': request})
         return Response(serializer.data)
 
@@ -121,4 +134,3 @@ class APIAttackViewSet(viewsets.ModelViewSet):
         attacks = Attack.objects.filter(element=data.capitalize())
         serializer = AttackSerializer(attacks, many=True, context={'request': request})
         return Response(serializer.data)
-

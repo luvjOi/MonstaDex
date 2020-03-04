@@ -35,15 +35,9 @@
                     self.update()
                 })
         }
-        CLIENT.events.on('create_binding', function(){
+        CLIENT.events.on('update_player', function(){
             get_player(self.id)
          })
-        CLIENT.events.on('pick_monster', function(){
-            get_player(self.id)
-        })
-        CLIENT.events.on('save_mon', function(){
-            get_player(self.id)
-        })
     </script>
 
     <style>

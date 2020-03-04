@@ -34,14 +34,14 @@ CLIENT.api = {
     pick_monster: function(pk){
       return CLIENT.api.request("PUT", "/api/bindings/" + pk + "/pick_monster/")
     },
+    pick_attacks: function(pk, attacks_list){
+      return CLIENT.api.request("PUT", "/api/bindings/" + pk + "/pick_attacks/", attacks_list)
+    },
     delete_binding: function(pk){
       return CLIENT.api.request("DELETE", "/api/bindings/" + pk)
     },
     get_attacks: function() {
       return CLIENT.api.request("GET", "/api/attacks/get_attacks/" )
-    },
-    base_attacks: function() {
-      return CLIENT.api.request("GET", "/api/attacks/" )
     },
     get_attacks_by_type: function(element){
       return CLIENT.api.request('PUT', '/api/attacks/get_attacks_by_type/', element)
