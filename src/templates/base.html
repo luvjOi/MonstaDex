@@ -44,13 +44,14 @@
           MonstaDex
       </h1>
       <nav>
+          {% if user.is_authenticated %}
           <a href="{% url 'home' %}">Monsters</a>
           <a href="/players/{{user.player.id}}">Profile</a>
           <a href="{% url 'attacks_list' %}">Attacks</a>
-          {% if user.is_authenticated %}
           <a href="{% url 'logout' %}">Logout</a>
           {% else %}
-          <a href="{% url 'login'}">Login</a>
+          <a href="{% url 'signup' %}">Create an account!</a>
+          <a href="{% url 'login' %}">Login</a>
           {% endif %}
       </nav>
   </div>

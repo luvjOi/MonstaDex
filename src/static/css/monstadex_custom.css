@@ -116,9 +116,18 @@ section {
      margin: .5em 0 0 5em;
   }
 
-  .login-page {
+  .login-page, .registration-page {
     background-color: #86d8d0;
     padding: 20px!important;
+  }
+
+  .registration-page {
+    width: 25%!important;
+    margin-top: 15px;
+  }
+
+  .form-button {
+    margin-top: 10px;
   }
 
 /* =Info Bar
