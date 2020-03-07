@@ -1,17 +1,5 @@
 {% extends 'base.html' %}
 {% load static from staticfiles %}
-{% block content %}
-<body>
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <monsters_list></monsters_list>
-    </div>
-  </div>
-</div>
-</body>
-
-{% endblock %}
 {% if user.is_authenticated %}
   Hi {{ user.username }}!
   <p><a href="{% url 'login' %}">logout</a></p>

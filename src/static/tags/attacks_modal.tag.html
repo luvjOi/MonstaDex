@@ -58,7 +58,7 @@
                 $('.save_attack').prop('disabled', false);
                 $('#attacks_selection' + self.id + ' option').prop('disabled', true);
                 for (var attack = 0; attack < 4; attack++){
-                    var found = self.attacks.find(atk => {  // lambda expression
+                    var found = self.attacks.find(atk => {
                             return atk.id == self.chosen_attacks[attack]
                     })
                     $('#attacks_selection' + self.id + ' option[value=' + found.id + ']').prop('disabled', false)

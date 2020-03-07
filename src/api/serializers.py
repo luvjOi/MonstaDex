@@ -30,6 +30,7 @@ class MonstaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Monsta
         fields = [
+            'id',
             'monsterName',
             'family',
             'element',

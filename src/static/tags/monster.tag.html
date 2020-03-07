@@ -1,0 +1,48 @@
+<monster>
+    <div class="container">
+        <div class="row monster-list-card">
+              <div class="card">
+                 <div class="card-body">
+                     <h5 class="card-title text-center">{monster.monsterName}</h5>
+                     <img class="card-img-top" src="{monster.image}" alt="{monster.monsterName}">
+                     <p class="card-text">{monster.description}</p>
+                 </div>
+                  <div class="card-footer text-muted">
+                      <div class="row text-center align-middle">
+                          <div class="col">{monster.family}</div>
+                          <div class="col-xs-2 v-divider"></div>
+                          <div class="col">{monster.element}<img class="logo" src="{monster.element_logo}"></div>
+                        </div>
+                    </div>
+              </div>
+          </div>
+      </div>
+    <script>
+        var self = this;
+        self.id = self.opts.id
+        self.on('mount', function(){
+        get_mon(self.id);
+        console.log(self.monster)
+      })
+
+      var get_mon = function(pk){
+         CLIENT.api.get_mon(pk)
+          .done(function(monster){
+             self.monster = monster
+           })
+          .fail(function(error){
+             console.log("Errors == " + error)
+           })
+          .always(function(){
+             self.update()
+          })
+       }
+    </script>
+    <style>
+        .monster-list-card {
+          width: 20rem;
+          height: 510px;
+          margin-bottom: 30px;
+        }
+    </style>
+</monster>

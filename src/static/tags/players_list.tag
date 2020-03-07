@@ -23,7 +23,6 @@
       var self = this;
       self.players = {}
       self.on('mount', function(){
-        console.log('we both are nerds')
         get_players_list();
       })
       var get_players_list = function(){
