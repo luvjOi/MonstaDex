@@ -18,7 +18,7 @@
    <tbody>
      <tr each='{attack in attacks}'>
        <td>{attack.id}</td>
-       <td>{attack.name}</td>
+       <td><a class="text-dark" href="/attacks/{attack.id}">{attack.name}</a></td>
        <td><img src="{attack.image}">{attack.element}</td>
        <td>{attack.description}</td>
      </tr>

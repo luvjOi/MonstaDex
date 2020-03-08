@@ -1,0 +1,37 @@
+<attacks_detail>
+    <div class="d-flex justify-content-center w-25 container">
+       <div class="card text-center">
+         <div class="card-body">
+         <h5 class="card-title">{attacks.name}</h5>
+         <p class="card-text">{attacks.description}</p>
+          </div>
+           <div class="card-footer text-muted">
+                 <div class="row text-center align-middle">
+                     <div class="col">{attacks.element}</div>
+                     <div class="col-xs-2 v-divider"></div>
+                     <div class="col"><img class="logo" src="{attacks.image}"></div>
+                 </div>
+             </div>
+       </div>
+    </div>
+    <script>
+        var self = this
+        self.attacks = {}
+        self.id = self.opts.id
+        self.on('mount', function(){
+        base_attacks(self.id);
+      })
+      var base_attacks = function(pk){
+      CLIENT.api.base_attacks(pk)
+          .done(function(attacks){
+              self.attacks = attacks
+          })
+          .fail(function(error){
+              alert(error.responseJSON)
+          })
+          .always(function(){
+              self.update()
+          })
+  }
+    </script>
+</attacks_detail>
