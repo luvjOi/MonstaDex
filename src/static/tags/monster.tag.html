@@ -19,11 +19,10 @@
       </div>
     <script>
         var self = this;
-        self.monster = {}
+        self.monsters = {}
         self.id = self.opts.id
         self.on('mount', function(){
         get_mon(self.id);
-        console.log(self.monster)
       })
 
       var get_mon = function(pk){

@@ -1,23 +1,29 @@
 <monsters_list>
-    <div class="text-center">
+<div class="container monster-container bg-dark">
+    <div class="text-center text-white">
       <h1>Click on a name for more info</h1>
     </div>
- <div class="container">
     <div class="d-flex justify-content-center">
-    <table class="table text-center table-striped table-dark w-25">
-   <thead>
+    <table class="table text-center table-hover table-bordered table-info table-margin">
+   <thead class="thead-light">
      <tr>
        <th scope="col">Name</th>
+       <th scope="col">Family</th>
+       <th scope="col">Element</th>
+       <th scope="col">Description</th>
      </tr>
    </thead>
    <tbody>
      <tr each='{monster in monsters}'>
-         <td><a href="/monsters/{monster.id}">{monster.monsterName}</a></td>
+         <td><a class="text-dark" href="/monsters/{monster.id}">{monster.monsterName}</a></td>
+         <td><a>{monster.family}</a></td>
+         <td><a>{monster.element}</a></td>
+         <td><a>{monster.description}</a></td>
      </tr>
    </tbody>
    </table>
    </div>
-  </div>
+ </div>
     <script>
      var self = this;
      self.monster = {}
@@ -39,9 +45,11 @@
     </script>
     <style>
         .monster-container {
-          background-color: #000;
-          padding: 50px 0 0 0;
+          padding: 35px 50px 35px 50px;
           margin-top: 15px;
         }
+        .table-margin {
+          margin-top: 40px;
+        ]
     </style>
 </monsters_list>
