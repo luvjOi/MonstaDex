@@ -1,9 +1,9 @@
 <attacks_detail>
     <div class="d-flex justify-content-center w-25 container">
-       <div class="card text-center">
+       <div class="card text-center attack-card">
          <div class="card-body">
-         <h5 class="card-title">{attacks.name}</h5>
-         <p class="card-text">{attacks.description}</p>
+             <h5 class="{attacks.element} atk-header card-title">{attacks.name}</h5>
+             <p class="card-text">{attacks.description}</p>
           </div>
            <div class="card-footer text-muted">
                  <div class="row text-center align-middle">
@@ -14,14 +14,39 @@
              </div>
        </div>
     </div>
+    <div class="d-flex justify-content-center">
+        <div class="row w-25">
+            <div class="col detail-button1">
+                <a href="/attacks/{prev_id}" class="btn btn-secondary">Prev</a>
+            </div>
+            <div class="col detail-button2">
+                <a href="/attacks/{next_id}" class="btn btn-secondary">Next</a>
+            </div>
+        </div>
+    </div>
     <script>
         var self = this
         self.attacks = {}
         self.id = self.opts.id
+        self.prev_id = parseInt(self.id) - 1
+        self.next_id = parseInt(self.id) + 1
+        self.first_id = self.opts.first_id
+        self.attack_count = self.opts.attack_count
         self.on('mount', function(){
-        base_attacks(self.id);
+        self.base_attacks(self.id);
+        self.prev_next();
       })
-      var base_attacks = function(pk){
+
+      self.prev_next = function(){
+         if(self.id == self.first_id){
+            self.prev_id = self.attack_count
+         }
+         if(self.id == self.attack_count){
+           self.next_id = self.first_id
+         }
+      }
+
+      self.base_attacks = function(pk){
       CLIENT.api.base_attacks(pk)
           .done(function(attacks){
               self.attacks = attacks
@@ -34,4 +59,57 @@
           })
   }
     </script>
+    <style>
+        .atk-header {
+          margin: -20.6px -21px 15px -21px;
+          padding: 15px;
+       }
+
+       .attack-card{
+         width: 500px;
+         height: 200px;
+         margin-top: 20px;
+       }
+
+       .detail-button1 {
+          margin-left: .9em;
+       }
+
+       .detail-button2 {
+          margin-left: 8.5em;
+       }
+
+        .Arcane {
+            background-color: edb0fc;
+        }
+
+        .Light {
+            background-color: f9fccf;
+        }
+
+        .Air {
+            background-color: b3fcef;
+        }
+
+        .Water{
+            background-color: aadaff;
+        }
+
+        .Fire
+        {
+            background-color: ffcfbc;
+        }
+
+        .Dark{
+            background-color: a8a8a8;
+        }
+
+        .Earth{
+            background-color: b6ffaf;
+        }
+
+        .Normal{
+            background-color: ffaacb;
+        }
+    </style>
 </attacks_detail>
