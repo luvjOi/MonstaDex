@@ -62,7 +62,6 @@
                     var found = self.attacks.find(atk => {
                             return atk.id == self.chosen_attacks[attack]
                     })
-                    console.log(self.chosen_attacks)
                     $('#attacks_selection' + self.id + ' option[value=' + found.id + ']').prop('disabled', false)
                 }
             }
