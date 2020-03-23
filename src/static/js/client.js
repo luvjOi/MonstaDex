@@ -46,6 +46,12 @@ CLIENT.api = {
     get_attacks_by_type: function(element){
       return CLIENT.api.request('PUT', '/api/attacks/get_attacks_by_type/', element)
     },
+    get_attacks_by_name: function(name){
+      return CLIENT.api.request('PUT', '/api/attacks/get_attacks_by_name/', name)
+    },
+    get_attacks_my_monsters_have: function(myMonsters){
+      return CLIENT.api.request('PUT', '/api/attacks/get_attacks_my_monsters_have/', myMonsters)
+    },
     base_mon: function() {
       return CLIENT.api.request('GET', '/api/monstas/')
     },

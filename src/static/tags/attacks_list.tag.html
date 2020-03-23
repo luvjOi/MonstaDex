@@ -2,8 +2,20 @@
   <div class="container">
     <div>
       <h1>Attacks</h1>
+      <div class="d-flex flex-row justify-content-center">
+        <div class="radio">
+          <label><input class="name" type="radio" name="radio" onclick={searchBy('name')}>Search by Name</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="radio" onclick={searchBy('element')}>Search by Element</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="radio" onclick={searchBy('myMonsters')}>Attacks My Monsters Have</label>
+        </div>
+      </div>
       <div class="md-form mt-0 search">
-        <input class="monster_search form-control-sm ml-3 w-75" placeholder="Search by Element" type="text" value=''>
+        <input class="monster_search form-control-sm ml-3 w-75" placeholder="Search by Element" id="filterMyMonsters" type="text" value=''>
+<!--        {get_attacks_my_monsters_have}-->
       </div>
     </div>
     <table class="table text-center">
@@ -28,16 +40,41 @@
   <script>
   var self = this
   self.attacks = {}
+  self.monster = self.opts.mon
+  self.id = self.opts.id
+  self.typeOfSearch = 'name'
   self.on('mount', function(){
       get_attacks();
-      $('.monster_search').on('change', function(){
-        filterMonsters();
-      })
       $('.monster_search').focus(function() {
-        this.value = "";
-        get_attacks();
+          get_attacks();
+<!--        console.log(self.monstersearch[0].value)-->
      });
+      $('.monster_search').on('change', function(){
+         self.performSearch();
+      })
   })
+
+
+   self.searchBy = function(newType){
+     return function(e){
+     self.typeOfSearch = newType
+    }
+
+  }
+
+    self.performSearch = function(){
+     switch (self.typeOfSearch){
+        case 'name':
+          filterName();
+          break;
+        case 'element':
+          filterMonsters();
+          break;
+        case 'myMonsters':
+          filterMyMonsters()
+          break;
+         }
+      }
 
   var get_attacks = function(){
       CLIENT.api.get_attacks()
@@ -51,9 +88,22 @@
               self.update()
           })
   }
-  var filterMonsters = function(){
+   var filterMonsters = function(){
    console.log($('.monster_search')[0].value)
    CLIENT.api.get_attacks_by_type($('.monster_search')[0].value)
+     .done(function(attacks){
+         self.attacks = self.attacks
+     })
+     .fail(function(error){
+         alert(error.responseJSON)
+     })
+     .always(function(){
+         self.update()
+     })
+   }
+
+   var filterName = function(){
+     CLIENT.api.get_attacks_by_name($('.monster_search')[0].value)
      .done(function(attacks){
          self.attacks = attacks
      })
@@ -64,6 +114,33 @@
          self.update()
      })
    }
+
+    var filterMyMonsters = function(){
+     CLIENT.api.get_attacks_my_monsters_have($('.monster_search')[0].value)
+     .done(function(attacks){
+         self.attacks = attacks
+         console.log(self.attacks[5].name)
+
+     })
+     .fail(function(error){
+         alert(error.responseJSON)
+     })
+     .always(function(){
+         self.update()
+     })
+   }
+
+
+      var attack_name = function() {
+        self.filterMyMonsters();
+     }
+     console.log(self.mon_attacks)
+
+
+
+
+
+
   </script>
   <style>
   h1 {

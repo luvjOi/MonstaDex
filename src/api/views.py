@@ -12,7 +12,6 @@ from bindings.models import Binding
 from monster.models import Monsta
 from players.models import Player
 
-
 ELEMENT = [
     'arcane',
     'light',
@@ -134,3 +133,27 @@ class APIAttackViewSet(viewsets.ModelViewSet):
         attacks = Attack.objects.filter(element=data.capitalize())
         serializer = AttackSerializer(attacks, many=True, context={'request': request})
         return Response(serializer.data)
+
+    @action(detail=False, methods=['PUT'])
+    def get_attacks_by_name(self, request):
+        data = request.data.lower()
+        attacks = Attack.objects.filter(name=data.capitalize())
+        serializer = AttackSerializer(attacks, many=True, context={'request': request})
+        return Response(serializer.data)
+
+    @action(detail=False, methods=['PUT'])
+    def get_attacks_my_monsters_have(self, request):
+        player = request.user.player
+        monsters = player.binding.all()
+        my_attacks = []
+        search = request.data
+        if search == my_attacks.name:
+            print(request.data)
+            return Response(my_attacks)
+        for mon in monsters:
+            for attack in mon.attacks.all():
+                my_attacks.append(attack)
+                print(attack)
+        serializer = AttackSerializer(my_attacks, many=True, context={'request': request})
+        return Response(serializer.data)
+
