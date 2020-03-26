@@ -53,7 +53,6 @@
   }
 
   var filterMonsters = function(){
-   console.log($('.monster_search')[0].value)
    CLIENT.api.get_attacks_by_type($('.monster_search')[0].value)
      .done(function(attacks){
          self.attacks = attacks
