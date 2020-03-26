@@ -1,8 +1,8 @@
 <attacks_list>
-    <div class="container">
-        <div>
+    <div class="container attack-container bg-dark">
+        <div class="text-light">
             <h1>Attacks</h1>
-            <div class="d-flex flex-row justify-content-center">
+            <div class="d-flex flex-row container justify-content-around radio-buttons">
                 <div class="radio">
                     <label><input class="name" type="radio" name="radio" onclick={searchBy('name')}>Search by Name</label>
                 </div>
@@ -14,32 +14,29 @@
                 </div>
             </div>
             <div class="md-form mt-0 search">
-                <input class="monster_search form-control-sm ml-3 w-75" placeholder="Search by Element" id="filterMyMonsters" type="text" value='' onchange={performSearch}>
+                <input class="monster_search form-control-sm ml-3 w-75" type="text" placeholder="Search by Name" value='' onchange={performSearch}>
             </div>
         </div>
-        <table class="table text-center">
+        <table class="table text-center table-info table-hover table-bordered">
             <thead>
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Name</th>
-                <th scope="col">Element</th>
-                <th scope="col">Description</th>
+            <tr class="thead-light">
+                <th>Id</th>
+                <th>Name</th>
+                <th>Element</th>
+                <th>Description</th>
             </tr>
             </thead>
             <tbody>
             <tr each='{attack in attacks}'>
                 <td>{attack.id}</td>
-                <td>{attack.name}</td>
-                <td><img src="{attack.image}">{attack.element}</td>
-                <td>{attack.description}</td>
+                <td class="w-25">{attack.name}</td>
+                <td><img src="{attack.image}">{}</td>
+                <td class="w-50">{attack.description}</td>
             </tr>
             </tbody>
         </table>
     </div>
     <script>
-        // TODO: Make the name radio button automatically selected
-        // TODO: Make the search bar value clear when a new radio button is selected
-        // TODO:
         var self = this
         self.attacks = {}
         self.monster = self.opts.mon
@@ -47,31 +44,34 @@
         self.typeOfSearch = 'name'
         self.on('mount', function(){
             get_attacks();
-            // $('.monster_search').focus(function() {
-            //     get_attacks();
-            //     <!--        console.log(self.monstersearch[0].value)-->
-            // });
-
-        })
-
+            $('.name').attr('checked', true)
+          })
 
         self.searchBy = function(newType){
             return function(e){
                 self.typeOfSearch = newType
-                self.performSearch()
+                self.clearSearch();
             }
+        }
+
+        self.clearSearch = function(){
+            $('.monster_search').val('')
+            self.performSearch()
         }
 
         self.performSearch = function(){
             switch (self.typeOfSearch){
                 case 'name':
                     filterName();
+                    $('.monster_search').attr('placeholder', 'Search by Name')
                     break;
                 case 'element':
                     filterMonsters();
+                    $('.monster_search').attr('placeholder', 'Search by Element')
                     break;
                 case 'myMonsters':
                     filterMyMonsters();
+                    $('.monster_search').attr('placeholder', 'Search by attacks my monsters have')
                     break;
             }
         }
@@ -89,7 +89,6 @@
                 })
         }
         var filterMonsters = function(){
-            console.log($('.monster_search')[0].value)
             CLIENT.api.get_attacks_by_type($('.monster_search')[0].value)
                 .done(function(attacks){
                     self.attacks = attacks
@@ -103,8 +102,6 @@
         }
 
         var filterName = function(){
-            console.log($('.monster_search')[0].value)
-
             CLIENT.api.get_attacks_by_name($('.monster_search')[0].value)
                 .done(function(attacks){
                     self.attacks = attacks
@@ -118,13 +115,9 @@
         }
 
         var filterMyMonsters = function(){
-            console.log("Filtering by my monsters")
-            console.log($('.monster_search')[0].value)
-
             CLIENT.api.get_attacks_my_monsters_have($('.monster_search')[0].value)
                 .done(function(attacks){
                     self.attacks = attacks
-                    console.log(attacks)
                 })
                 .fail(function(error){
                     alert(error.responseJSON)
@@ -134,17 +127,14 @@
                 })
         }
 
-
-
-
-
-
-
     </script>
     <style>
+       .attack-container {
+            padding: 50px 100px;
+        }
         h1 {
             text-align: center;
-            color: #000;
+            color: #fff;
         }
         .search {
             padding: 20px;
@@ -152,8 +142,11 @@
             margin: 10px 225px 10px auto;
         }
         .monster_search {
-            background-color: #3cb5f9;
+            background-color: #fff;
             border: 1px solid #000!important;
+        }
+        .radio-buttons {
+            margin-top: 10px;
         }
     </style>
 </attacks_list>

@@ -125,18 +125,18 @@ class APIAttackViewSet(viewsets.ModelViewSet):
         serializer = AttackSerializer(attacks, many=True, context={'request': request})
         return Response(serializer.data)
 
-    # TODO: Make attacks by type check against our list of attacks - allow partial matches
-
     @action(detail=False, methods=['PUT'])
     def get_attacks_by_type(self, request):
         data = request.data.lower()
+        attacks = Attack.objects.all()
         if data == "":
-            attacks = Attack.objects.all()
             serializer = AttackSerializer(attacks, many=True, context={'request': request})
         else:
-            if data not in ELEMENT:
-                raise ValidationError("That element doesn't exist!")
-            attacks = Attack.objects.filter(element=data.capitalize())
+            returned_attacks = []
+            for attack in attacks:
+                if request.data.lower() in attack.element.lower():
+                    returned_attacks.append(attack)
+            attacks = returned_attacks
             serializer = AttackSerializer(attacks, many=True, context={'request': request})
         return Response(serializer.data)
 
@@ -157,33 +157,19 @@ class APIAttackViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['PUT'])
     def get_attacks_my_monsters_have(self, request):
-        # Grab player
         player = request.user.player
-        # Grab their monsters
         monsters = player.binding.all()
-        # Create an empty list
         my_attacks = []
-        # For each of my monsters,
         for mon in monsters:
-            # For each of their attacks
             for attack in mon.attacks.all():
-                # add the attack in the list
                 my_attacks.append(attack)
-        # If our data passed from the frontend is NOT empty...
         if request.data != "":
-            # Make a new list (This one we'll use in place of the old list)
             searched_attacks = []
-            # for each attack in MY ATTACKS ( We made this list in the first for loop)
             for attack in my_attacks:
-                # if the data (to lowercase) is in the attack name (Gre in Grenade, for example)
                 if request.data.lower() in attack.name.lower():
-                    # Add this attack to our new list
                     searched_attacks.append(attack)
-            # this is the list built when we are passing something to this function, otherwise..
             serializer = AttackSerializer(searched_attacks, many=True, context={'request': request})
         else:
-            # we return only our attacks, with no filtering!
             serializer = AttackSerializer(my_attacks, many=True, context={'request': request})
-        # Return the response with our serializers data loaded up
         return Response(serializer.data)
 
