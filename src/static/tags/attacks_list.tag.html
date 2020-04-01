@@ -10,7 +10,7 @@
                     <label><input type="radio" name="radio" onclick={searchBy('element')}>Search by Element</label>
                 </div>
                 <div class="radio">
-                    <label><input type="radio" name="radio" onclick={searchBy('myMonsters')}>Attacks My Monsters Have</label>
+                    <label><input type="radio" name="radio" onclick={searchBy('myMonstersAttacks')}>Attacks My Monsters Have</label>
                 </div>
             </div>
             <div class="md-form mt-0 search">
@@ -32,6 +32,9 @@
                 <td class="w-25">{attack.name}</td>
                 <td><img src="{attack.image}">{}</td>
                 <td class="w-50">{attack.description}</td>
+            </tr>
+            <tr>
+                <td if='{attacks.length === 0}'></td>
             </tr>
             </tbody>
         </table>
@@ -69,8 +72,8 @@
                     filterMonsters();
                     $('.monster_search').attr('placeholder', 'Search by Element')
                     break;
-                case 'myMonsters':
-                    filterMyMonsters();
+                case 'myMonstersAttacks':
+                    filterSearchMyMonstersAttacks();
                     $('.monster_search').attr('placeholder', 'Search by attacks my monsters have')
                     break;
             }
@@ -88,6 +91,7 @@
                     self.update()
                 })
         }
+
         var filterMonsters = function(){
             CLIENT.api.get_attacks_by_type($('.monster_search')[0].value)
                 .done(function(attacks){
@@ -114,7 +118,7 @@
                 })
         }
 
-        var filterMyMonsters = function(){
+        var filterSearchMyMonstersAttacks = function(){
             CLIENT.api.get_attacks_my_monsters_have($('.monster_search')[0].value)
                 .done(function(attacks){
                     self.attacks = attacks

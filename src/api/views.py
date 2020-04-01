@@ -136,8 +136,9 @@ class APIAttackViewSet(viewsets.ModelViewSet):
             for attack in attacks:
                 if request.data.lower() in attack.element.lower():
                     returned_attacks.append(attack)
-            attacks = returned_attacks
-            serializer = AttackSerializer(attacks, many=True, context={'request': request})
+            if len(returned_attacks) == 0:
+                return Response([])
+            serializer = AttackSerializer(returned_attacks, many=True, context={'request': request})
         return Response(serializer.data)
 
     @action(detail=False, methods=['PUT'])
@@ -151,8 +152,7 @@ class APIAttackViewSet(viewsets.ModelViewSet):
             for attack in attacks:
                 if request.data.lower() in attack.name.lower():
                     returned_attacks.append(attack)
-            attacks = returned_attacks
-            serializer = AttackSerializer(attacks, many=True, context={'request': request})
+            serializer = AttackSerializer(returned_attacks, many=True, context={'request': request})
         return Response(serializer.data)
 
     @action(detail=False, methods=['PUT'])
