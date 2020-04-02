@@ -26,7 +26,7 @@
  </div>
     <script>
      var self = this;
-     self.monster = {}
+     self.monsters = {}
      self.on('mount', function(){
          get_mon_list();
      })

@@ -3,23 +3,56 @@
 {% block content %}
 <body>
   <div class="home-container bg-dark text-white container">
-    <h1 class="text-center">What I've Learned</h1>
+    <h1 class="text-center">About</h1>
       <div class="home-content">
-      <p>Hello, I'm Lauren Blakley, an aspiring web developer and designer. I have been working on the past four months
-        on this site for a monster game where users can sign up, create their own player and choose their own monster.
+      <p>Hello, I'm Lauren Blakley, an aspiring web developer and designer. I have graduated in 2018 with a Bachelor of
+        Science Degree in Web Design and Development from Lewis-Clark State Collage. For the last four months, I have been working on this site for a monster game where users can sign up, create their own player and choose their own monster.
         They are also able to even choose whatever attack they want for any monster in their party. I've build this site using Django, the API rest framework and RiotJS.</p></br>
-
-      <p>I've learned to dynamically pass in data such as the id of an object or a function into the riot tag in
-      order to access information from the database. I would then be able to use those data in order to display information
-      about a property of an object. For example the name or id of an attack or monster. I've also learned about to make an api request
-      to the backend to get a list or pk of an object. From there, I was able to utilize the information to use for the view
-      and render it in the correct template.</p></br>
-
-      <p> I learned to set up url paths to the various pages, I would give the template a name in order to pass it in dynamically in a link element
-      in the menu. And I was also able to pass in the user.player.id in order set the profile page based on the id of the player that is currently logged in,
-      I also implemented a login//login form as well as a registration form where users can sign up with an username and also choose a name for their player.
-      On the backend side, I learned how to create a player object and assign it to the user. I did this by retrieving whatever input the user put into new player field and assigning it to
-      whatever name they put into the username field. And from there I was able to have a new player and a new user created together.</p></br>
+        <h1 class="text-center">Skills</h1>
+        <div>
+          <div class="row home-row">
+            <div class="col">
+               <h3 class="home-text">Backend</h3>
+               <ul>
+                 <li>Models</li>
+                 <li>Class Viewsets</li>
+                 <li>Urls</li>
+                 <li>Creating Objects</li>
+                 <li>Login/Logout and Registration forms</li>
+                 <li>Authentication</li>
+               </ul>
+            </div>
+            <div class="col">
+              <h3 class="home-text">Github</h3>
+              <ul>
+                 <li>Pull requests</li>
+                 <li>Push commits</li>
+                 <li>Checkout</li>
+                 <li>Creating a new branch</li>
+                 <li>Login/Logout and Registration forms</li>
+               </ul>
+            </div>
+          </div>
+          <div class="row home-row">
+            <div class="col-sm">
+               <h3 class="home-text">API</h3>
+               <ul>
+                 <li>Actions</li>
+                 <li>Serializers</li>
+                 <li>Bindings</li>
+                 <li>Making an API request</li>
+               </ul>
+            </div>
+            <div class="col-sm">
+              <h3 class="home-text">Frontend</h3>
+              <ul>
+                 <li>RiotJS</li>
+                 <li>Bootstrap</li>
+                 <li>Jquery</li>
+               </ul>
+            </div>
+          </div>
+        </div>
       </div>
   </div>
 </body>
