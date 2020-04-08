@@ -13,9 +13,9 @@
        <th scope="col">Description</th>
      </tr>
    </thead>
-   <tbody>
-     <tr each='{monster in monsters}'>
-         <td><a class="text-dark" href="/monsters/{monster.id}">{monster.monsterName}</a></td>
+   <tbody id="table">
+     <tr each='{monster in monsters}' role="button" data-href="/monsters/{monster.id}">
+         <td><a class="text-dark">{monster.monsterName}</a></td>
          <td><a>{monster.family}</a></td>
          <td><a>{monster.element}</a></td>
          <td><a>{monster.description}</a></td>
@@ -30,6 +30,13 @@
      self.on('mount', function(){
          get_mon_list();
      })
+
+      $(function(){
+        $(".table").on("click", "tr[role=\"button\"]", function (e) {
+          window.location = $(this).data("href");
+        });
+      });
+
      var get_mon_list = function(){
          CLIENT.api.base_mon()
            .done(function(monsters){
