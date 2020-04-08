@@ -16,7 +16,7 @@
    </thead>
    <tbody class="text-center" id="table">
      <tr each='{attack in attacks}' role="button" data-href="/attacks/{attack.id}">
-       <td class="w-25"><a class="text-dark stretched-link">{attack.name}</a></td>
+       <td class="w-25">{attack.name}</td>
        <td class="w-25"><img src="{attack.image}">{attack.element}</td>
        <td class="w-50">{attack.description}</td>
      </tr>
@@ -73,11 +73,6 @@
    .attack-container {
       padding: 50px 100px;
     }
-
-    #table td:hover {
-    cursor: pointer;
-  }
-
   h1 {
      text-align: center;
      color: #fff;
