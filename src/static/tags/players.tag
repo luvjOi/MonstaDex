@@ -39,7 +39,6 @@
             get_player(self.id)
          })
     </script>
-
     <style>
         .player-container {
           background-color: #86d8d0;
