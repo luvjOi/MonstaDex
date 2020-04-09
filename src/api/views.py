@@ -12,7 +12,6 @@ from bindings.models import Binding
 from monster.models import Monsta
 from players.models import Player
 
-
 ELEMENT = [
     'arcane',
     'light',
@@ -129,8 +128,48 @@ class APIAttackViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['PUT'])
     def get_attacks_by_type(self, request):
         data = request.data.lower()
-        if data not in ELEMENT:
-            raise ValidationError("That element doesn't exist!")
-        attacks = Attack.objects.filter(element=data.capitalize())
-        serializer = AttackSerializer(attacks, many=True, context={'request': request})
+        attacks = Attack.objects.all()
+        if data == "":
+            serializer = AttackSerializer(attacks, many=True, context={'request': request})
+        else:
+            returned_attacks = []
+            for attack in attacks:
+                if request.data.lower() in attack.element.lower():
+                    returned_attacks.append(attack)
+            if len(returned_attacks) == 0:
+                return Response([])
+            serializer = AttackSerializer(returned_attacks, many=True, context={'request': request})
         return Response(serializer.data)
+
+    @action(detail=False, methods=['PUT'])
+    def get_attacks_by_name(self, request):
+        data = request.data.lower()
+        attacks = Attack.objects.all()
+        if data == "":
+            serializer = AttackSerializer(attacks, many=True, context={'request': request})
+        else:
+            returned_attacks = []
+            for attack in attacks:
+                if request.data.lower() in attack.name.lower():
+                    returned_attacks.append(attack)
+            serializer = AttackSerializer(returned_attacks, many=True, context={'request': request})
+        return Response(serializer.data)
+
+    @action(detail=False, methods=['PUT'])
+    def get_attacks_my_monsters_have(self, request):
+        player = request.user.player
+        monsters = player.binding.all()
+        my_attacks = []
+        for mon in monsters:
+            for attack in mon.attacks.all():
+                my_attacks.append(attack)
+        if request.data != "":
+            searched_attacks = []
+            for attack in my_attacks:
+                if request.data.lower() in attack.name.lower():
+                    searched_attacks.append(attack)
+            serializer = AttackSerializer(searched_attacks, many=True, context={'request': request})
+        else:
+            serializer = AttackSerializer(my_attacks, many=True, context={'request': request})
+        return Response(serializer.data)
+

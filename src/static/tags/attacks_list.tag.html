@@ -1,83 +1,156 @@
 <attacks_list>
-  <div class="container">
-    <div>
-      <h1>Attacks</h1>
-      <div class="md-form mt-0 search">
-        <input class="monster_search form-control-sm ml-3 w-75" placeholder="Search by Element" type="text" value=''>
-      </div>
+    <div class="container attack-container bg-dark">
+        <div class="text-light">
+            <h1>Attacks</h1>
+            <div class="d-flex flex-row container justify-content-around radio-buttons">
+                <div class="radio">
+                    <label><input class="name" type="radio" name="radio" onclick={searchBy('name')}>Search by Name</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="radio" onclick={searchBy('element')}>Search by Element</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="radio" onclick={searchBy('myMonstersAttacks')}>Attacks My Monsters Have</label>
+                </div>
+            </div>
+            <div class="md-form mt-0 search">
+                <input class="monster_search form-control-sm ml-3 w-75" type="text" placeholder="Search by Name" value='' onchange={performSearch}>
+            </div>
+        </div>
+        <table class="table text-center table-info table-hover table-bordered">
+            <thead>
+            <tr class="thead-light">
+                <th>Id</th>
+                <th>Name</th>
+                <th>Element</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr each='{attack in attacks}'>
+                <td>{attack.id}</td>
+                <td class="w-25">{attack.name}</td>
+                <td><img src="{attack.image}">{}</td>
+                <td class="w-50">{attack.description}</td>
+            </tr>
+            <tr>
+                <td if='{attacks.length === 0}'></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-    <table class="table text-center">
-   <thead>
-     <tr>
-       <th scope="col">Id</th>
-       <th scope="col">Name</th>
-       <th scope="col">Element</th>
-       <th scope="col">Description</th>
-     </tr>
-   </thead>
-   <tbody>
-     <tr each='{attack in attacks}'>
-       <td class="w-25">{attack.id}</td>
-       <td class="w-25">{attack.name}</td>
-       <td class="w-25"><img src="{attack.image}">{attack.element}</td>
-       <td class="w-50">{attack.description}</td>
-     </tr>
-   </tbody>
-   </table>
-  </div>
-  <script>
-  var self = this
-  self.attacks = {}
-  self.on('mount', function(){
-      get_attacks();
-      $('.monster_search').on('change', function(){
-        filterMonsters();
-      })
-      $('.monster_search').focus(function() {
-        this.value = "";
-        get_attacks();
-     });
-  })
+    <script>
+        var self = this
+        self.attacks = {}
+        self.monster = self.opts.mon
+        self.id = self.opts.id
+        self.typeOfSearch = 'name'
+        self.on('mount', function(){
+            get_attacks();
+            $('.name').attr('checked', true)
+          })
 
-  var get_attacks = function(){
-      CLIENT.api.get_attacks()
-          .done(function(attacks){
-              self.attacks = attacks
-          })
-          .fail(function(error){
-              alert(error.responseJSON)
-          })
-          .always(function(){
-              self.update()
-          })
-  }
-  var filterMonsters = function(){
-   console.log($('.monster_search')[0].value)
-   CLIENT.api.get_attacks_by_type($('.monster_search')[0].value)
-     .done(function(attacks){
-         self.attacks = attacks
-     })
-     .fail(function(error){
-         alert(error.responseJSON)
-     })
-     .always(function(){
-         self.update()
-     })
-   }
-  </script>
-  <style>
-  h1 {
-     text-align: center;
-     color: #000;
-  }
-  .search {
-     padding: 20px;
-     width: 50%;
-     margin: 10px 225px 10px auto;
-  }
-  .monster_search {
-     background-color: #3cb5f9;
-     border: 1px solid #000!important;
-  }
-  </style>
+        self.searchBy = function(newType){
+            return function(e){
+                self.typeOfSearch = newType
+                self.clearSearch();
+            }
+        }
+
+        self.clearSearch = function(){
+            $('.monster_search').val('')
+            self.performSearch()
+        }
+
+        self.performSearch = function(){
+            switch (self.typeOfSearch){
+                case 'name':
+                    filterName();
+                    $('.monster_search').attr('placeholder', 'Search by Name')
+                    break;
+                case 'element':
+                    filterMonsters();
+                    $('.monster_search').attr('placeholder', 'Search by Element')
+                    break;
+                case 'myMonstersAttacks':
+                    filterSearchMyMonstersAttacks();
+                    $('.monster_search').attr('placeholder', 'Search by attacks my monsters have')
+                    break;
+            }
+        }
+
+        var get_attacks = function(){
+            CLIENT.api.get_attacks()
+                .done(function(attacks){
+                    self.attacks = attacks
+                })
+                .fail(function(error){
+                    alert(error.responseJSON)
+                })
+                .always(function(){
+                    self.update()
+                })
+        }
+
+        var filterMonsters = function(){
+            CLIENT.api.get_attacks_by_type($('.monster_search')[0].value)
+                .done(function(attacks){
+                    self.attacks = attacks
+                })
+                .fail(function(error){
+                    alert(error.responseJSON)
+                })
+                .always(function(){
+                    self.update()
+                })
+        }
+
+        var filterName = function(){
+            CLIENT.api.get_attacks_by_name($('.monster_search')[0].value)
+                .done(function(attacks){
+                    self.attacks = attacks
+                })
+                .fail(function(error){
+                    alert(error.responseJSON)
+                })
+                .always(function(){
+                    self.update()
+                })
+        }
+
+        var filterSearchMyMonstersAttacks = function(){
+            CLIENT.api.get_attacks_my_monsters_have($('.monster_search')[0].value)
+                .done(function(attacks){
+                    self.attacks = attacks
+                })
+                .fail(function(error){
+                    alert(error.responseJSON)
+                })
+                .always(function(){
+                    self.update()
+                })
+        }
+
+    </script>
+    <style>
+       .attack-container {
+            padding: 50px 100px;
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+        }
+        .search {
+            padding: 20px;
+            width: 50%;
+            margin: 10px 225px 10px auto;
+        }
+        .monster_search {
+            background-color: #fff;
+            border: 1px solid #000!important;
+        }
+        .radio-buttons {
+            margin-top: 10px;
+        }
+    </style>
 </attacks_list>

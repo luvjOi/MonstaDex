@@ -7,7 +7,8 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <select multiple="multiple" name="edit_attacks" onchange="{edit_attacks}" id="attacks_selection{id}">
+                  <div each="{attack in chosen_attacks}">{name_from_id(attack)}</div>
+                    <select multiple="multiple" name="edit_attacks" class="edit_attacks" onchange="{edit_attacks}" id="attacks_selection{id}">
                         <option each="{attack in attacks}" value="{attack.id}" >{attack.name}</option>
                     </select>
                 </div>
@@ -32,7 +33,6 @@
           })
      })
 
-
      self.set_attacks = function(){
          self.selectedAttacks = self.monster.attacks
          for(var attack = 0; attack < self.selectedAttacks.length; attack++){
@@ -43,8 +43,9 @@
             }
             if (self.selectedAttacks.length == 4 ) {
                 $('.save_attack').prop('disabled', false);
-            }
+           }
      }
+
        self.edit_attacks = function(){
             self.chosen_attacks = []
             $('#editAttacks'+ self.id +' option:selected').each(function(index, element){
@@ -74,19 +75,24 @@
               .fail(function(error){
                    alert(error.responseJSON)
                })
-              }
+           }
 
      self.base_attacks = function(data){
          CLIENT.api.get_attacks()
           .done(function(attacks){
                self.attacks = attacks
-           })
+            })
            .fail(function(error){
                 console.log("Errors == " + error)
             })
             .always(function(){
                self.update()
             })
+        }
+
+       self.name_from_id = function(attackID) {
+           var found = self.attacks.find(atk => { return atk.id == attackID })
+           return found.name
         }
     </script>
 </attacks_modal>
