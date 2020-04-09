@@ -130,6 +130,10 @@ section {
     margin-top: 10px;
   }
 
+   #table td:hover {
+    cursor: pointer;
+  }
+
 /* =Info Bar
 -------------------------------------------------------------- */
 #info-bar {

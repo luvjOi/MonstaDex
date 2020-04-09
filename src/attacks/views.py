@@ -16,4 +16,9 @@ class SiteAttackView(LoginRequiredMixin, viewsets.ModelViewSet):
 
     def retrieve(self, *args, **kwargs):
         attack = Attack.objects.get(pk=kwargs['pk'])
-        return render(self.request, 'attacks/attack_detail.html', context={'attack': attack})
+        attack_count = Attack.objects.all().count()
+        first_id = Attack.objects.first().id
+        return render(self.request, 'attacks/attack_detail.html',
+                      context={'attack': attack, 'attack_count': attack_count, 'first_id': first_id})
+
+
