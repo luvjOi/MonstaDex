@@ -39,7 +39,6 @@ urlpatterns = [
     path('signup/', src_views.signup, name='signup'),
     path('profile/', TemplateView.as_view(template_name='players/player_detail.html'), name='profile'),
     path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
-
 ]
 
 if settings.DEBUG:

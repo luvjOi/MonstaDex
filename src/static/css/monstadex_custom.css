@@ -130,6 +130,27 @@ section {
     margin-top: 10px;
   }
 
+  .home-container {
+    padding: 50px;
+  }
+
+  .home-content {
+    margin-top: 25px;
+  }
+
+  .home-text {
+     margin: 40px 0 20px 0;
+  }
+
+  .home-row {
+     margin-left: 14em;
+  }
+
+  .player-container {
+      background-color: #86d8d0;
+      padding: 15px 0 0 0;
+  }
+
    #table td:hover {
     cursor: pointer;
   }

@@ -16,4 +16,7 @@ class SiteMonsterView(LoginRequiredMixin, viewsets.ModelViewSet):
 
     def retrieve(self, *args, **kwargs):
         monster = Monsta.objects.get(pk=kwargs['pk'])
-        return render(self.request, 'monsters/monsters_detail.html', context={'monster': monster})
+        monster_count = Monsta.objects.all().count()
+        first_id = Monsta.objects.first().id
+        return render(self.request, 'monsters/monsters_detail.html',
+                      context={'monster': monster, 'monster_count': monster_count, 'first_id': first_id})

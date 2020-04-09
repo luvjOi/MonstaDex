@@ -1,15 +1,12 @@
 <modal>
     <div class="container">
-        <!-- The Modal -->
         <div class="modal fade" id="myModal">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <!-- Modal Header -->
                     <div class="modal-header">
                         <h4 class="modal-title text-center">Choose what monster you want</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
-                    <!-- Modal body -->
                     <div class="modal-body">
                         <div class="container">
                             <select name="mon_list" id="mon_list" onchange="{set_monster}">
@@ -20,7 +17,6 @@
                             <img id="mon_pic" class="mon_pic" src={chosen_monster.image}>
                         </div>
                     </div>
-                    <!-- Modal footer -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="{create_binding}">Save changes</button>

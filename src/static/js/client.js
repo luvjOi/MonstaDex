@@ -58,6 +58,9 @@ CLIENT.api = {
     base_mon: function() {
       return CLIENT.api.request('GET', '/api/monstas/')
     },
+    get_mon: function(pk) {
+      return CLIENT.api.request('GET', '/api/monstas/' + pk)
+    },
     create_binding: function(data) {
       return CLIENT.api.request('POST', '/api/bindings/create_binding/', data)
     },

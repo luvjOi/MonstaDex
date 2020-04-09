@@ -1,0 +1,85 @@
+<monster>
+    <div class="container">
+        <div class="row monster-list-card">
+              <div class="card">
+                 <div class="card-body">
+                     <h5 class="card-title text-center">{monster.monsterName}</h5>
+                     <img class="card-img-top" src="{monster.image}" alt="{monster.monsterName}">
+                     <p class="card-text">{monster.description}</p>
+                 </div>
+                  <div class="card-footer text-muted">
+                      <div class="row text-center align-middle">
+                          <div class="col">{monster.family}</div>
+                          <div class="col-xs-2 v-divider"></div>
+                          <div class="col">{monster.element}<img class="logo" src="{monster.element_logo}"></div>
+                        </div>
+                    </div>
+              </div>
+          </div>
+         <div class="d-flex justify-content-center">
+          <div class="row">
+            <div class="col-md prev-button">
+               <a href="/monsters/{prev_id}" class="btn btn-secondary">Prev</a>
+            </div>
+            <div class="col-md monsters-button">
+                <a href="/monsters" class="btn btn-secondary">Monsters</a>
+            </div>
+            <div class="col-md next-button">
+               <a href="/monsters/{next_id}" class="btn btn-secondary">Next</a>
+            </div>
+          </div>
+         </div>
+      </div>
+    <script>
+        var self = this;
+        self.monsters = {}
+        self.id = self.opts.id
+        self.prev_id = parseInt(self.id) - 1
+        self.next_id = parseInt(self.id) + 1
+        self.first_id = self.opts.first_id
+        self.monster_count = self.opts.monster_count
+        self.on('mount', function(){
+        get_mon(self.id);
+        self.prev_next();
+      })
+
+       self.prev_next = function(){
+         if(self.id == self.first_id){
+            self.prev_id = self.monster_count
+         }
+         if(self.id == self.monster_count){
+           self.next_id = self.first_id
+         }
+      }
+
+      var get_mon = function(pk){
+         CLIENT.api.get_mon(pk)
+          .done(function(monster){
+             self.monster = monster
+           })
+          .fail(function(error){
+             console.log("Errors == " + error)
+           })
+          .always(function(){
+             self.update()
+          })
+       }
+    </script>
+    <style>
+       .prev-button {
+         right: 15px;
+       }
+       .monsters-button {
+          right: 25px;
+       }
+
+       .next-button {
+         left: 246px;
+         bottom: 38px;
+       }
+        .monster-list-card {
+          width: 20rem;
+          height: 510px;
+        }
+    </style>
+</monster>
