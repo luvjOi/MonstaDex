@@ -1,19 +1,19 @@
 <players>
-  <div class="container player-container text-center">
+  <div class="container card-container text-center">
   <modal></modal>
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  <button type="button" class="btn button" data-toggle="modal" data-target="#myModal">
     Pick monster
   </button>
-    <div class="text">
+    <div class="profile-text">
         <h1>Name:{player.name}</h1>
         <h1>Full Party:{player.full_party}</h1>
         <h1>Joined:{player.lifespan}</h1>
-        </div>
-        <div class="card-deck">
-          <monster_detail each="{mon in player.binding}" mon="{mon}" full_party="{player.full_party}"></monster_detail>
-        </div>
     </div>
-    <div>
+      <div class="card-mobile">
+        <div class="container-fluid card-deck">
+            <monster_detail each="{mon in player.binding}" mon="{mon}" full_party="{player.full_party}"></monster_detail>
+       </div>
+      </div>
     </div>
     <script>
         var self = this;
@@ -39,10 +39,4 @@
             get_player(self.id)
          })
     </script>
-    <style>
-        .player-container {
-          background-color: #86d8d0;
-          padding: 15px 0 0 0;
-        }
-    </style>
 </players>

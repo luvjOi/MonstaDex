@@ -1,26 +1,30 @@
 <monsters_list>
-<div class="container monster-container bg-dark">
-    <div class="text-center text-white">
+<div class="container">
+    <div class="text-center text text-dark">
       <h1>Click on a name for more info</h1>
     </div>
-    <div class="d-flex justify-content-center">
-    <table class="table text-center table-hover table-bordered table-info table-margin">
-   <thead class="thead-light">
+   <div class="">
+   <table id="no-more-tables" class="table mon-table text-center table-light table-hover table-bordered table-margin" id="table">
+   <div class="col-12 col-sm-5 col-lg-5 col-push-5">
+   <thead class="thead-dark">
      <tr>
-       <th scope="col">Name</th>
-       <th scope="col">Family</th>
-       <th scope="col">Element</th>
-       <th scope="col">Description</th>
+       <th>Name</th>
+       <th>Image</th>
+       <th>Family</th>
+       <th>Element</th>
+       <th>Description</th>
      </tr>
-   </thead>
+   </thead >
    <tbody id="table">
      <tr each='{monster in monsters}' role="button" data-href="/monsters/{monster.id}">
-         <td><a class="text-dark">{monster.monsterName}</a></td>
-         <td><a>{monster.family}</a></td>
-         <td><a>{monster.element}</a></td>
-         <td><a>{monster.description}</a></td>
+         <td data-title="Name">{monster.monsterName}</td>
+         <td data-title="Image"><img src="{monster.image}" alt="{monster.name}" class="img-thumbnail"></td>
+         <td data-title="Family">{monster.family}</td>
+         <td data-title="Element">{monster.element}</td>
+         <td data-title="Description">{monster.description}</td>
      </tr>
    </tbody>
+   </div>
    </table>
    </div>
  </div>
@@ -50,13 +54,4 @@
              })
         }
     </script>
-    <style>
-        .monster-container {
-          padding: 35px 50px 35px 50px;
-          margin-top: 15px;
-        }
-        .table-margin {
-          margin-top: 40px;
-        ]
-    </style>
 </monsters_list>

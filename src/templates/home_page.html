@@ -2,56 +2,16 @@
 {% load static from staticfiles %}
 {% block content %}
 <body>
-  <div class="home-container bg-dark text-white container">
+  <div class="container-fluid page-container">
     <h1 class="text-center">About</h1>
-      <div class="home-content">
-      <p>Hello, I'm Lauren Blakley, an aspiring web developer and designer. I have graduated in 2018 with a Bachelor of
-        Science Degree in Web Design and Development from Lewis-Clark State Collage. For the last four months, I have been working on this site for a monster game where users can sign up, create their own player and choose their own monster.
-        They are also able to even choose whatever attack they want for any monster in their party. I've build this site using Django, the API rest framework and RiotJS.</p></br>
-        <h1 class="text-center">Skills</h1>
-        <div>
-          <div class="row home-row">
-            <div class="col">
-               <h3 class="home-text">Backend</h3>
-               <ul>
-                 <li>Models</li>
-                 <li>Class Viewsets</li>
-                 <li>Urls</li>
-                 <li>Creating Objects</li>
-                 <li>Login/Logout and Registration forms</li>
-                 <li>Authentication</li>
-               </ul>
-            </div>
-            <div class="col">
-              <h3 class="home-text">Github</h3>
-              <ul>
-                 <li>Pull requests</li>
-                 <li>Push commits</li>
-                 <li>Checkout</li>
-                 <li>Creating a new branch</li>
-                 <li>Login/Logout and Registration forms</li>
-               </ul>
-            </div>
-          </div>
-          <div class="row home-row">
-            <div class="col-sm">
-               <h3 class="home-text">API</h3>
-               <ul>
-                 <li>Actions</li>
-                 <li>Serializers</li>
-                 <li>Bindings</li>
-                 <li>Making an API request</li>
-               </ul>
-            </div>
-            <div class="col-sm">
-              <h3 class="home-text">Frontend</h3>
-              <ul>
-                 <li>RiotJS</li>
-                 <li>Bootstrap</li>
-                 <li>Jquery</li>
-               </ul>
-            </div>
-          </div>
+      <div class="container home-content">
+      <p>Hello, I'm Lauren Blakley, an aspiring web developer and designer looking to help turn ideas into wonderful sites. I have graduated in 2018 with a Bachelor of
+        Science Degree in Web Design and Development from Lewis-Clark State Collage. I have worked and maintained the website for a small local business
+        called A Way Forward since 2016 and build a website for Common Sense Solutions. I have created this site to further and showcase my skills with web development
+      and what I've learned with Django and databases.</p></br>
+        <h1 class="text-center home-text">Skills</h1>
+        <div class="d-flex justify-content-center">
+          <img class="img-fluid" src="/static/images/diagram.png" alt="diagram of django and what was use to make the site">
         </div>
       </div>
   </div>

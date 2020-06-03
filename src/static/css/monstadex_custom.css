@@ -1,4 +1,4 @@
-
+reset css
 
 body{
     background-color: grey;
@@ -19,7 +19,8 @@ table, caption, tbody, tfoot, thead, tr, th, td {
   border: 0;
   margin: 0;
   padding: 0;
-  vertical-align: baseline; }
+  vertical-align: baseline;
+  }
 
 body {
   line-height: 1; }
@@ -53,6 +54,7 @@ table {
 a img {
   border: none; }
 
+
 /* =Scss Variables
 -------------------------------------------------------------- */
 /* =Global
@@ -65,12 +67,15 @@ a img {
   box-sizing: border-box; }
 
 body {
-  background-color: #3cb5f9;
-  color: #505050;
+  background-color: #2d2d2d;
+  width: 100%;
+  color: #aaa;
   font-family: "Ubuntu", sans-serif;
   font-weight: 300;
   font-size: 16px;
-  line-height: 1.8; }
+  line-height: 1.8;
+  margin-top: 10em;
+ }
 
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
@@ -86,6 +91,7 @@ a:hover {
 
 /* =Template
 -------------------------------------------------------------- */
+
 #wrapper {
   width: 100%;
   margin: 0 auto; }
@@ -113,25 +119,45 @@ section {
     color: white; }
 
   .login {
-     margin: .5em 0 0 5em;
+     margin-top: 20px;
+
   }
 
   .login-page, .registration-page {
-    background-color: #86d8d0;
-    padding: 20px!important;
+    color: #fff;
+    background-color: #1b1b1b;
+    padding: 20px;
+  }
+
+  .login-page {
+      width: 40%;
+  }
+
+  .login-text {
+    margin-left: 280px;
   }
 
   .registration-page {
-    width: 25%!important;
     margin-top: 15px;
+    width: 45%;
+  }
+
+  .login-form, .signup-page, .signup-form  {
+     max-width: 380px;
+     padding: 15px 35px 45px;
+     margin: 0 auto;
+     background-color: #1b1b1b;
+  }
+
+  .signup-header {
+    margin-bottom: 15px;
+    padding-top: 20px;
   }
 
   .form-button {
     margin-top: 10px;
-  }
-
-  .home-container {
-    padding: 50px;
+    padding: .5em .75em;
+    font-size: 18px;
   }
 
   .home-content {
@@ -140,15 +166,6 @@ section {
 
   .home-text {
      margin: 40px 0 20px 0;
-  }
-
-  .home-row {
-     margin-left: 14em;
-  }
-
-  .player-container {
-      background-color: #86d8d0;
-      padding: 15px 0 0 0;
   }
 
    #table td:hover {
@@ -182,59 +199,325 @@ section {
 /* =Header
 -------------------------------------------------------------- */
 header {
-  width: 100%;
-  height: 150px;
-  margin-bottom: 1em;
-  overflow: hidden;
-  position: relative;
-  top: 0;
-  left: 0;
-  z-index: 999;
-  background-color: #0683c9;
-  -webkit-transition: height 0.3s;
-  -moz-transition: height 0.3s;
-  -ms-transition: height 0.3s;
-  -o-transition: height 0.3s;
-  transition: height 0.3s; }
-  header h1#logo {
+ 	position: fixed;
+ 	background: #335C7D;
+ 	line-height: 108px;
+    height: 108px;
+ 	color: #fff;
+ 	font-family: "Oswald", sans-serif;
+    -webkit-literal-transition: height 0.4s ease;
+    -moz-literal-transition: height 0.4s ease;
+    -ms-literal-transition: height 0.4s ease;
+    -o-literal-transition: height 0.4s ease;
+    literal-transition: height 0.4s ease;
+ }
+
+ header.sticky {
+ 		font-size: 24px;
+ 		line-height: 82px;
+ 		height: 82px;
+ 		background: #335C7D;
+ 		text-align: left;
+
+ }
+
+.nav-link {
     display: inline-block;
-    height: 150px;
-    line-height: 150px;
-    float: left;
-    font-family: "Oswald", sans-serif;
-    font-size: 60px;
+    float: right;
+    font-size: 18px;
+    color: #fff;
+}
+
+.navbar {
+   width: 100%;
+   font-size: 40px;
+   text-align: center;
+   margin-top: -16px;
+   color: #fff;
+   font-family: "Oswald", sans-serif;
+}
+
+.nav-link:hover {
+   color: rgba(255, 255, 255, 0.8);
+   -webkit-transition: all 0.3s;
+   -moz-transition: all 0.3s;
+   -ms-transition: all 0.3s;
+   -o-transition: all 0.3s;
+   transition: all 0.3s;
+}
+
+.navbar-brand {
+    display: inline-block;
+    font-size: 36px;
+    margin-left: 30px;
     color: white;
-    font-weight: 400;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    -ms-transition: all 0.3s;
-    -o-transition: all 0.3s;
-    transition: all 0.3s; }
-  header nav {
-    display: inline-block;
-    float: right; }
-    header nav a {
-      line-height: 150px;
-      margin-left: 20px;
-      color: #9fdbfc;
-      font-weight: 700;
-      font-size: 18px;
-      -webkit-transition: all 0.3s;
-      -moz-transition: all 0.3s;
-      -ms-transition: all 0.3s;
-      -o-transition: all 0.3s;
-      transition: all 0.3s; }
-      header nav a:hover {
-        color: white; }
-  header.smaller {
-    height: 75px; }
-    header.smaller h1#logo {
-      width: 150px;
-      height: 75px;
-      line-height: 75px;
-      font-size: 30px; }
-    header.smaller nav a {
-      line-height: 75px; }
+ }
+
+
+/* =attack_list.tag.html
+-------------------------------------------------------------- */
+      h1 {
+          color: #fff;
+        }
+
+      .search {
+          width: 100%;
+          text-align:center;
+          padding: 20px;
+        }
+
+      .monster_search {
+          background-color: #fff;
+          border: 1px solid #000!important;
+        }
+
+      .radio-buttons {
+          margin-top: 10px;
+          color: #fff;
+          display: inline!important;
+        }
+
+      .radio {
+        margin-left: 23px;
+      }
+ /* =attacks_detail.tag.html
+-------------------------------------------------------------- */
+
+      .atk-header {
+         margin: -20.6px -21px 15px -21px;
+         padding: 15px;
+       }
+
+      .attack-card{
+         width: 18.7rem;
+       }
+
+       .attack-body {
+         height: 220px!important;
+       }
+
+       .attack-list-button {
+         margin-left: 52px;
+       }
+
+        .attack-next-button {
+          margin-left: 51px;
+        }
+
+        .attack-prev-button {
+          margin-left: 0px;
+        }
+/* =attack_detail and monster_detail cards
+-------------------------------------------------------------- */
+
+        .Arcane {
+            background-color: #edb0fc;
+        }
+
+        .Light {
+            background-color: #f9fccf;
+        }
+
+        .Air {
+            background-color: #b3fcef;
+        }
+
+        .Water{
+            background-color: #aadaff;
+        }
+
+        .Fire
+        {
+            background-color: #ffcfbc;
+        }
+
+        .Dark{
+            background-color: #a8a8a8;
+        }
+
+        .Earth{
+            background-color: #b6ffaf;
+        }
+
+        .Normal{
+            background-color: #ffaacb;
+        }
+
+/* =monster_detail.tag.html
+-------------------------------------------------------------- */
+        .front,
+        .back {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            -webkit-transition: 0.6s;
+            transition: 0.6s;
+            -webkit-transform-style: preserve-3d;
+             transform-style: preserve-3d;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .flip-card {
+           perspective: 1000px;
+           width: 20em;
+           height: 550px;
+           transition: 0.6s;
+           transform-style: preserve-3d;
+        }
+
+        .flip-card-inner {
+          position: relative;
+          text-align: center;
+        }
+
+        .monster-flip {
+            transform: rotateY(180deg);
+            transform-style: preserve-3d;
+        }
+
+        .card-deck .card {
+          margin: 0 0 0rem;
+        }
+
+        .card-deck {
+          margin-left: 28px;
+        }
+
+        .card-footer {
+            position: relative;
+            width: 100%;
+            bottom: 0px;
+        }
+
+        .card-body {
+            background-color: #fff;
+        }
+
+        .card {
+         width: 100%;
+         height: 515px;
+       }
+
+        .button-row{
+            background-color: rgba(0,0,0,.03);
+            width: 10px;
+            margin-left: 0px;
+        }
+
+        .h-divider{
+            margin-top:5px;
+            margin-bottom:10px;
+            height:1px;
+            width:100%;
+            border-top:1px solid #000000;
+        }
+
+        .front {
+            z-index: 2;
+            transform: rotateY(0deg);
+        }
+
+         .back {
+            transform: rotateY(180deg);
+        }
+
+        .text-center:first-child div{
+            border-radius: 3px 3px 0px 0px;
+            color: #000;
+        }
+
+        .attack-modal {
+           margin-top: -15px;
+        }
+
+        .attack-header{
+            display: block;
+            margin: 5px -20px 0px -20px;
+        }
+
+        .row-center{
+            position: relative;
+            top: 0px;
+            height: 55px;
+        }
+
+        .attack-image{
+            position: relative;
+            top: 3px;
+            left: 10px;
+        }
+
+/* =monster.tag.html
+-------------------------------------------------------------- */
+       .monster-prev-button {
+          margin-top: 5px;
+          margin-left: -15px;
+       }
+
+       .monster-list-button {
+          margin-top: -3px;
+          margin-left: 50px;
+       }
+
+       .monster-next-button {
+          margin-left: 60px;
+          margin-top: -3px;
+
+       }
+
+       .monster-list-card {
+          width: 20rem;
+          height: 510px;
+          color: #000;
+        }
+
+/* =modal.tag.html
+-------------------------------------------------------------- */
+       .table-margin {
+          margin-top: 40px;
+        }
+
+        .mon_pic {
+           height: 50px;
+           width: 50px;
+           margin-top: 5px;
+        }
+
+        .text {
+          color: #000;
+        }
+
+/* =attacks_modal.tag.html
+-------------------------------------------------------------- */
+
+       .attack-selection {
+          margin: 10px 0px;
+        }
+
+       .attack-name {
+          margin-top: -18px;
+          height: 20px;
+
+       }
+
+/* =monsters_list.tag.html
+-------------------------------------------------------------- */
+       .img-thumbnail {
+          width: 50px!important;
+        }
+
+        table {
+           width: 95%!important;
+           margin-left: 25px;
+        }
+
+        .container {
+          padding: 0px!important;
+          width: 100%!important;
+        }
 
 /* =Footer
 -------------------------------------------------------------- */
@@ -254,55 +537,257 @@ header {
    border-left:1px solid black;
   }
 
-
   .card-img-top {
     height: 200px;
     margin-bottom: 2em;
   }
 
+   .button {
+      background-color: #335C7D;
+      color: #fff;
+     }
+
+   .button:hover {
+      color: #fff;
+      background-color: rgba(51, 92, 125, 0.85);
+     }
+
+     .profile-text {
+        margin: 15px 0;
+     }
+
 /* =Media Queries
 -------------------------------------------------------------- */
-@media all and (max-width: 660px) {
-  /* =Header
-  -------------------------------------------------------------- */
-  header h1#logo {
-    display: block;
-    float: none;
-    margin: 0 auto;
-    height: 100px;
-    line-height: 100px;
-    text-align: center; }
-  header nav {
-    display: block;
-    float: none;
-    height: 50px;
-    text-align: center;
-    margin: 0 auto; }
-    header nav a {
-      line-height: 50px;
-      margin: 0 10px; }
-  header.smaller {
-    height: 75px; }
-    header.smaller h1#logo {
-      height: 40px;
-      line-height: 40px;
-      font-size: 30px; }
-    header.smaller nav {
-      height: 35px; }
-      header.smaller nav a {
-        line-height: 35px; } }
-@media all and (max-width: 600px) {
-  .container {
-    width: 100%; }
+@media screen and (max-width: 322px) {
+   .navbar-brand {
+      font-size: 22px;
+   }
 
-  #info-bar a {
-    display: block; }
-  #info-bar span.all-tutorials,
-  #info-bar span.back-to-tutorial {
-    width: 100%; }
-  #info-bar span.all-tutorials,
-  #info-bar span.back-to-tutorial {
+   .navbar-toggler {
+      font-size: 26px;
+   }
+}
+
+@media screen and (max-width: 400px) {
+   .monster-list-card, .attack-card{
+      width: 100%!important;
+      margin-left: 0px!important;
+   }
+
+   .attack-button-row {
+     width: 100%;
+   }
+
+   .attack-list-button, .attack-next-button, .attack-prev-button {
+     margin-left: 0px;
+     margin-bottom: 5px;
+   }
+
+   .monster-row, .attack-button-row{
+     display: flex;
+     flex-direction: column;
+   }
+
+   .monster-prev-button, .monster-next-button, .monster-list-button, .attack-prev-button,
+   .attack-list-button, .attack-next-button  {
+     width: 100%;
+   }
+
+   .attack-prev-button, .attack-list-button, .attack-next-button {
+     display: block;
+     width: 100%;
+   }
+
+   .monster-prev-button, .monster-list-button, .monster-next-button{
+     margin-left: 0px;
+   }
+}
+
+
+@media screen and (max-width: 500px) {
+     .card-deck {
+      margin-left: -24px!important;
+   }
+
+   .flip-card, .front, .back{
+     width: 100%!important;
+   }
+}
+
+@media screen and (max-width: 575px) {
+   .card-container {
+     margin-left: 30px!important;
+   }
+
+   .card-mobile {
+      margin-left: -50px!important;
+   }
+
+   .flip-card, .front, .back{
+     width: 80%;
+   }
+
+   .card-small-screen .monster-card {
+      margin-left: -85px!important;
+   }
+
+   #no-more-tables {
+      margin-left: 15px!important;
+   }
+
+   .attack-modal-row {
+      margin-left: -140px;
+   }
+
+   .attack-name {
+      margin-top: -98px!important;
+      margin-left: 300px;
+   }
+}
+
+@media screen and (max-width: 767px) {
+   .registration-page {
+
+   }
+
+   .login-page {
+      width: 45%!important;
+  }
+
+   .card-small-screen {
+      margin-left: 175px!important;
+   }
+
+   .card-small-screen{
+     margin-left: 90px!important;
+   }
+
+    #no-more-tables {
+      margin-left: 12px!important;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .attack-name {
+      margin-top: -18px;
+    }
+
+	#no-more-tables table, thead, tbody, th, td, tr{
+		display: block;
+	}
+
+	#no-more-tables{
+	  width: 100%;
+	  margin-left: 30px;
+	}
+
+	#no-more-tables thead tr {
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+
+	#no-more-tables tr {
+	    border: 1px solid #ccc;
+	}
+
+	#no-more-tables td {
+		border: none;
+		border-bottom: 1px solid #eee;
+		position: relative;
+		padding-left: 50%;
+		white-space: normal;
+		text-align:left;
+	}
+
+	#no-more-tables td:before {
+		position: absolute;
+		top: 6px;
+		left: 6px;
+		width: 45%;
+		padding-right: 10px;
+		white-space: nowrap;
+		text-align:left;
+		font-weight: bold;
+	}
+
+   #no-more-tables td:before { content: attr(data-title); }
+
+  .card-mobile{
+     margin-left: -115px;
+  }
+
+   .navbar-nav a{
+     float: none;
+     display: block;
+     text-align: right;
+     font-size: 24px;
+   }
+
+   .navbar {
+     margin-top: -10px;
+   }
+
+   .navbar-nav li {
+     width: 100%;
+     margin-left: -.5em!important;
+     margin-top: -10px;
+
+   }
+
+  .navbar-toggler{
+    font-size: 24px;
+    padding: 0.6rem;
+    color: #fff;
+    border: 1px solid #fff;
+    margin-top: -.2em;
+}
+
+  .navbar-toggler span {
     float: none;
-    text-align: center; }
-  #info-bar span.all-tutorials {
-    border-bottom: solid 1px #0793e2; } }
+    display: block;
+    text-align: left;
+    margin-left: -20px;
+  }
+
+  .navbar-collapse {
+    background-color: #335C7D;
+    line-height: 30px;
+    margin: -15px -20px 0px -20px;
+    padding-top: 5px;
+  }
+
+ .navbar-brand {
+   margin-left: 10px;
+ }
+
+ .registration-page {
+    width: 80%;
+  }
+
+  .login-page {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 1198px) {
+   .monster-card {
+      left: 80px;
+   }
+
+   .front,
+   .back {
+       width: 100%;
+       height: 100%;
+     }
+}
+
+@media screen and (max-width: 1422px) {
+   .card-container {
+     width: 100%;
+     padding-right: 15px;
+     padding-left: 15px;
+     margin-right: auto;
+     margin-left: auto;
+   }
+}

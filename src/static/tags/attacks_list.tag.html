@@ -1,8 +1,9 @@
 <attacks_list>
-    <div class="container attack-container bg-dark">
-        <div class="text-light">
-            <h1>Attacks</h1>
-            <div class="d-flex flex-row container justify-content-around radio-buttons">
+    <div class="container">
+        <div class="text-light text">
+            <h1 class="text-center">Attacks</h1>
+            <div class="d-flex container-fluid radio justify-content-center">
+              <div class="d-flex flex-column radio-buttons">
                 <div class="radio">
                     <label><input class="name" type="radio" name="radio" onclick={searchBy('name')}>Search by Name</label>
                 </div>
@@ -12,30 +13,29 @@
                 <div class="radio">
                     <label><input type="radio" name="radio" onclick={searchBy('myMonstersAttacks')}>Attacks My Monsters Have</label>
                 </div>
+              </div>
             </div>
-            <div class="md-form mt-0 search">
+            <div class="md-form mt-0 container-fluid search">
                 <input class="monster_search form-control-sm ml-3 w-75" type="text" placeholder="Search by Name" value='' onchange={performSearch}>
             </div>
         </div>
-        <table class="table text-center table-info table-hover table-bordered">
-            <thead>
-            <tr class="thead-light">
-                <th>Id</th>
-                <th>Name</th>
-                <th>Element</th>
-                <th>Description</th>
-            </tr>
+        <table id="no-more-tables" class="table text-center table-light table-hover table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Element</th>
+                    <th>Description</th>
+                </tr>
             </thead>
             <tbody>
-            <tr each='{attack in attacks}'>
-                <td>{attack.id}</td>
-                <td class="w-25">{attack.name}</td>
-                <td><img src="{attack.image}">{}</td>
-                <td class="w-50">{attack.description}</td>
-            </tr>
-            <tr>
-                <td if='{attacks.length === 0}'></td>
-            </tr>
+                <tr each='{attack in attacks}' role="button" data-href="/attacks/{attack.id}">
+                    <td class="w-25" data-title="Name">{attack.name}</td>
+                    <td data-title="Element"><img src="{attack.image}">{}</td>
+                    <td class="w-50" data-title="Description">{attack.description}</td>
+                </tr>
+                <tr>
+                    <td if='{attacks.length === 0}'></td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -49,6 +49,12 @@
             get_attacks();
             $('.name').attr('checked', true)
           })
+
+      $(function(){
+        $(".table").on("click", "tr[role=\"button\"]", function (e) {
+          window.location = $(this).data("href");
+        });
+      });
 
         self.searchBy = function(newType){
             return function(e){
@@ -74,7 +80,7 @@
                     break;
                 case 'myMonstersAttacks':
                     filterSearchMyMonstersAttacks();
-                    $('.monster_search').attr('placeholder', 'Search by attacks my monsters have')
+                    $('.monster_search').attr('placeholder', 'Search by My Monsters Attacks')
                     break;
             }
         }
@@ -130,27 +136,5 @@
                     self.update()
                 })
         }
-
     </script>
-    <style>
-       .attack-container {
-            padding: 50px 100px;
-        }
-        h1 {
-            text-align: center;
-            color: #fff;
-        }
-        .search {
-            padding: 20px;
-            width: 50%;
-            margin: 10px 225px 10px auto;
-        }
-        .monster_search {
-            background-color: #fff;
-            border: 1px solid #000!important;
-        }
-        .radio-buttons {
-            margin-top: 10px;
-        }
-    </style>
 </attacks_list>

@@ -1,5 +1,5 @@
 <players_list>
- <div class="container player_container">
+ <div class="container page-container">
    <table class="table text-center">
   <thead>
     <tr>

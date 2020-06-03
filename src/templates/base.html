@@ -2,6 +2,8 @@
 {% block header %}
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <!-- Jquery and RiotJS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script
@@ -9,7 +11,6 @@
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
       crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/riot/3.13.2/riot+compiler.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -39,26 +40,71 @@
         // This mounts all of our tags we've created!
         riot.mount('*');
     });
+   $(window).scroll(function() {
+    if ($(this).scrollTop() > 150){
+        $('header').addClass("sticky");
+    }
+    else{
+        $('header').removeClass("sticky");
+    }
+});
 </script>
-<header>
-  <div class="container clearfix">
-      <h1 id="logo">
-          MonstaDex
-      </h1>
-      <nav>
-          {% if user.is_authenticated %}
-          <a href="{% url 'home' %}">Home</a>
-          <a href="{% url 'monster_list' %}">Monsters</a>
-          <a href="/players/{{user.player.id}}">Profile</a>
-          <a href="{% url 'attacks_list' %}">Attacks</a>
-          <a href="{% url 'logout' %}">Logout</a>
-          {% else %}
-          <a href="{% url 'signup' %}">Create an account!</a>
-          <a href="{% url 'login' %}">Login</a>
-          {% endif %}
-      </nav>
+<header class="fixed-top">
+  <nav class="navbar navbar-expand-lg">
+  <a class="navbar-brand">MonstaDex</a>
+      <div class="menu">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fas fa-bars"></i>
+        </button>
+          </div>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+        {% if user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'monster_list' %}">Monsters</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'player_detail' user.player.id %}">Profile</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'attacks_list' %}">Attacks</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+      </li>
+        {% else %}
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'signup' %}">Create an account!</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
+      </li>
+        {% endif %}
+    </ul>
   </div>
-</header>
+</nav>
+    </header>
+<!--      <h1 id="logo">-->
+<!--          MonstaDex-->
+<!--      </h1>-->
+<!--      <div>-->
+<!--      <nav class="navbar navbar-expand-md py-3">-->
+<!--          {% if user.is_authenticated %}-->
+<!--          <a href="{% url 'home' %}">Home</a>-->
+<!--          <a href="{% url 'monster_list' %}">Monsters</a>-->
+<!--          <a href="{% url 'player_detail' user.player.id %}">Profile</a>-->
+<!--          <a href="{% url 'attacks_list' %}">Attacks</a>-->
+<!--          <a href="{% url 'logout' %}">Logout</a>-->
+<!--          {% else %}-->
+<!--          <a href="{% url 'signup' %}">Create an account!</a>-->
+<!--          <a href="{% url 'login' %}">Login</a>-->
+<!--          {% endif %}-->
+<!--      </nav>-->
+<!--      </div>-->
 {% endblock %}
 <div>
     {% block content %}

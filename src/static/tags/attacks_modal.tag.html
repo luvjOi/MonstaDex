@@ -1,20 +1,28 @@
 <attacks_modal>
     <div class="modal fade" id="editAttacks{id}" tabindex="-1" role="dialog" aria-labelledby="editAttacks" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-full-height" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Choose Monster Attacks</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center">Choose Monster Attacks</h4>
+                    <button type="button" class="close button" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="modal-body">
-                  <div each="{attack in chosen_attacks}">{name_from_id(attack)}</div>
-                    <select multiple="multiple" name="edit_attacks" class="edit_attacks" onchange="{edit_attacks}" id="attacks_selection{id}">
-                        <option each="{attack in attacks}" value="{attack.id}" >{attack.name}</option>
-                    </select>
+                <div class="modal-body attack-selection">
+                    <div class="container">
+                      <div class="row attack-modal-row">
+                        <div class="col-sm">
+                          <select multiple="multiple" name="edit_attacks" class="edit_attacks" onchange="{edit_attacks}" id="attacks_selection{id}">
+                            <option each="{attack in attacks}" value="{attack.id}" >{attack.name}</option>
+                          </select>
+                        </div>
+                        <div class="col-sm attack-name">
+                            <div each="{attack in chosen_attacks}">{name_from_id(attack)}</div>
+                        </div>
+                      </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary save_attack" onclick="{pick_attacks}" data-dismiss="modal">Save changes</button>
+                    <button type="button" class="btn button save_attack" onclick="{pick_attacks}" data-dismiss="modal">Save changes</button>
                 </div>
             </div>
         </div>
@@ -27,7 +35,7 @@
      self.id = self.opts.id
      self.selectedAttacks = []
      self.on('mount', function(){
-          self.base_attacks();
+          self.get_attacks();
           $('#editAttacks'+ self.id).on('show.bs.modal', function(){
              self.set_attacks();
           })
@@ -77,7 +85,7 @@
                })
            }
 
-     self.base_attacks = function(data){
+     self.get_attacks = function(data){
          CLIENT.api.get_attacks()
           .done(function(attacks){
                self.attacks = attacks

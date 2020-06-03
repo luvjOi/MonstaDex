@@ -1,11 +1,11 @@
 <monster>
-    <div class="container">
-        <div class="row monster-list-card">
+    <div class="container-fluid">
+        <div class="row monster-list-card d-flex justify-content-center">
               <div class="card">
                  <div class="card-body">
                      <h5 class="card-title text-center">{monster.monsterName}</h5>
                      <img class="card-img-top" src="{monster.image}" alt="{monster.monsterName}">
-                     <p class="card-text">{monster.description}</p>
+                     <p class="text-center">{monster.description}</p>
                  </div>
                   <div class="card-footer text-muted">
                       <div class="row text-center align-middle">
@@ -16,18 +16,16 @@
                     </div>
               </div>
           </div>
-         <div class="d-flex justify-content-center">
-          <div class="row">
-            <div class="col-md prev-button">
-               <a href="/monsters/{prev_id}" class="btn btn-secondary">Prev</a>
+         <div class="d-flex justify-content-center monster-row">
+            <div class="col-xs btn-block">
+               <a href="/monsters/{prev_id}" class="btn btn-secondary monster-prev-button">Prev</a>
             </div>
-            <div class="col-md monsters-button">
-                <a href="/monsters" class="btn btn-secondary">Monsters</a>
+            <div class="col-xs btn-block">
+                <a href="/monsters" class="btn btn-secondary monster-list-button">Monsters</a>
             </div>
-            <div class="col-md next-button">
-               <a href="/monsters/{next_id}" class="btn btn-secondary">Next</a>
+            <div class="col-xs btn-block">
+               <a href="/monsters/{next_id}" class="btn btn-secondary monster-next-button">Next</a>
             </div>
-          </div>
          </div>
       </div>
     <script>
@@ -65,21 +63,4 @@
           })
        }
     </script>
-    <style>
-       .prev-button {
-         right: 15px;
-       }
-       .monsters-button {
-          right: 25px;
-       }
-
-       .next-button {
-         left: 246px;
-         bottom: 38px;
-       }
-        .monster-list-card {
-          width: 20rem;
-          height: 510px;
-        }
-    </style>
 </monster>
