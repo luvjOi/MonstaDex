@@ -1,1 +1,1 @@
-web: gunicorn MonstaDex.src.wsgi --log-file -
+web: gunicorn src.wsgi --log-file -
