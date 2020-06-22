@@ -1,0 +1,4 @@
+Requirement already up-to-date: django in ./venv/lib/python3.8/site-packages (3.0.7)
+Requirement already satisfied, skipping upgrade: pytz in ./venv/lib/python3.8/site-packages (from django) (2019.3)
+Requirement already satisfied, skipping upgrade: sqlparse>=0.2.2 in ./venv/lib/python3.8/site-packages (from django) (0.3.0)
+Requirement already satisfied, skipping upgrade: asgiref~=3.2 in ./venv/lib/python3.8/site-packages (from django) (3.2.3)

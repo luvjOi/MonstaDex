@@ -17,7 +17,7 @@ SITE_ID = 1
 
 SITE_DOMAIN = os.environ.get('SITE_DOMAIN', 'http://localhost')
 
-THIRD_PARTY_APPS = (
+INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -28,19 +28,23 @@ THIRD_PARTY_APPS = (
     'django.contrib.postgres',
     'whitenoise',
     'rest_framework',
+    'monster',
+    'attacks',
+    'bindings',
+    'players',
 
     ## Sorl Thumbnail'
     'sorl.thumbnail',
     'django_extensions',
 
 )
-OUR_APPS = (
-    'monster',
-    'attacks',
-    'bindings',
-    'players',
-)
-INSTALLED_APPS = THIRD_PARTY_APPS + OUR_APPS
+# OUR_APPS = (
+#     'monster',
+#     'attacks',
+#     'bindings',
+#     'players',
+# )
+# INSTALLED_APPS = THIRD_PARTY_APPS + OUR_APPS
 
 MIDDLEWARE = (
     'whitenoise.middleware.WhiteNoiseMiddleware',
