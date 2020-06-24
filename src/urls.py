@@ -14,10 +14,10 @@ from players.models import Player
 from src.views import HomePageView
 
 
-admin.site.register(Monsta)
-admin.site.register(Player)
-admin.site.register(Binding)
-admin.site.register(Attack)
+# admin.site.register(Monsta)
+# admin.site.register(Player)
+# admin.site.register(Binding)
+# admin.site.register(Attack)
 
 urlpatterns = [
     # DRF API
