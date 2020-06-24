@@ -6,7 +6,6 @@
   </button>
     <div class="profile-text">
         <h1>Name:{player.name}</h1>
-        <h1>Full Party:{player.full_party}</h1>
         <h1>Joined:{player.lifespan}</h1>
     </div>
       <div class="card-mobile">
