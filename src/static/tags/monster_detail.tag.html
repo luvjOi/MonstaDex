@@ -10,15 +10,15 @@
                                 <img class="card-img-top" src="{mon.image}" alt="Card image cap">
                                 <p class="card-text">{mon.description}</p>
                             </div>
-                            <div class="row button-row">
-                                <div class="col">
+                            <div class="row button-row d-flex flex-row">
+                                <div class="">
                                     <button type="button" class="btn btn-secondary" onclick="{delete_binding}">Remove</button>
                                 </div>
-                                <div class="col d-flex flex-row">
+                                <div class="">
                                     <div if={!full_party}>
-                                        <button type="button" class="btn button pick-button" if={!picked} onclick="{pick_monster}">Pick me!</button>
+                                        <button type="button" class="w-100 btn button pick-button" if={!picked} onclick="{pick_monster}">Pick me!</button>
                                     </div>
-                                    <button type="button" class="btn btn-secondary pick-button" if={picked} onclick="{pick_monster}">Unpick</button>
+                                    <button type="button" class="w-100 btn btn-secondary pick-button" if={picked} onclick="{pick_monster}">Unpick</button>
                                 </div>
                             </div>
                             <div class="card-footer text-muted">

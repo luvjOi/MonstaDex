@@ -403,7 +403,6 @@ header {
 
         .button-row{
             background-color: rgba(0,0,0,.03);
-            width: 10px;
             margin-left: 0px;
         }
 
@@ -448,6 +447,10 @@ header {
             position: relative;
             top: 3px;
             left: 10px;
+        }
+
+        .pick-button {
+           margin-left: 50px;
         }
 
 /* =monster.tag.html
