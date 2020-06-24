@@ -401,11 +401,6 @@ header {
          height: 515px;
        }
 
-        .button-row{
-            background-color: rgba(0,0,0,.03);
-            margin-left: 0px;
-        }
-
         .h-divider{
             margin-top:5px;
             margin-bottom:10px;
@@ -450,7 +445,8 @@ header {
         }
 
         .pick-button {
-           margin-left: 50px;
+           width: 100px!important;
+
         }
 
 /* =monster.tag.html
