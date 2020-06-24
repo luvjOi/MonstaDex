@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container signup-page">
     <h2 class="text-center signup-header">Sign up</h2>
-    <form class="form-group signup-form" action="/action_page.php">
+    <form class="form-group signup-form" action="{% url 'login' %}">
      {% csrf_token %}
     <div class="form-group sign-up-form d-flex flex-column">
     {% for field in form %}

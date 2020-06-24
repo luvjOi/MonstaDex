@@ -1,23 +1,12 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from django.views.generic.base import TemplateView
+
 import src.views as src_views
-from django.contrib.auth import views as auth_views
-
-
-from attacks.models import Attack
-from bindings.models import Binding
-from monster.models import Monsta
-from players.models import Player
 from src.views import HomePageView
-
-
-# admin.site.register(Monsta)
-# admin.site.register(Player)
-# admin.site.register(Binding)
-# admin.site.register(Attack)
 
 urlpatterns = [
     # DRF API
