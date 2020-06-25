@@ -76,11 +76,12 @@
         }
 
         self.pick_monster = function(){
-            self.flipme()
+
             CLIENT.api.pick_monster(self.mon.id)
                 .done(function(mon){
                     self.picked = mon.picked
                     self.update_player()
+                    self.flipme()
                 })
                 .fail(function(error){
                     alert(error.responseJSON)
