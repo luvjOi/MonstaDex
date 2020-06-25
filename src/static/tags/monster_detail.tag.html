@@ -54,7 +54,11 @@
         self.flipped = false;
         self.full_party = self.opts.full_party
 
-         self.delete_binding = function(){
+        self.update_player = function(){
+            CLIENT.events.trigger("update_player")
+        }
+
+        self.delete_binding = function(){
             CLIENT.api.delete_binding(self.mon.id)
                .done(function(){
                     self.update_player()
@@ -67,11 +71,8 @@
                 })
         }
 
-        self.flipme = function(){
+          self.flipme = function(){
             self.flipped = !self.flipped
-        }
-        self.update_player = function(){
-            CLIENT.events.trigger("update_player")
         }
 
         self.pick_monster = function(){
