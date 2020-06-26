@@ -33,7 +33,7 @@
                     <div class="back">
                         <div class="card monster-card">
                             <div class="card-body">
-                                <button type="button" class="btn button attack-modal" onfocus="{flipme}" data-toggle="modal" data-target="#editAttacks{mon.id}">Edit Attacks</button>
+                                <button type="button" class="btn button attack-modal" onclick="{flipme}" data-toggle="modal" data-target="#editAttacks{mon.id}">Edit Attacks</button>
                                 <div class="text-center" each={atk in mon.attacks}>
                                     <div class="row attack-header row-center  {atk.element}">
                                         <div>{atk.name}</div>
