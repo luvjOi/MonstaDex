@@ -100,6 +100,7 @@ class APIBindingViewSet(viewsets.ModelViewSet):
     def delete_binding(self, pk):
         remove_mon = Binding.objects.get(pk=pk)
         remove_mon.delete()
+        print("This is a test")
         return Response(None)
 
     @action(detail=False, methods=['post'])
