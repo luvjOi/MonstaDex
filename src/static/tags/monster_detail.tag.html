@@ -62,10 +62,10 @@
         }
 
         self.delete_binding = function(){
+             console.log("this here is a test")
             CLIENT.api.delete_binding(self.mon.id)
                .done(function(){
                     self.update_player()
-                    console.log("this here is a test")
                 })
                .fail(function(error){
                     alert(error.responseJSON)
