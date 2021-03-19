@@ -11,7 +11,7 @@ django-extensions==2.2.6
 django-heroku==0.3.1
 django-next-prev==1.0.1
 django-querycount==0.7.0
-djangorestframework==3.10.3
+djangorestframework==3.11.2
 flake8==3.4.1
 gunicorn==20.0.4
 ipdb==0.10.3
